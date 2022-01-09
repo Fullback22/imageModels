@@ -14,15 +14,28 @@ class SimpelTwiceRandomModel
 	std::vector<cv::Mat> randomCorrelationCoefficients{};
 	cv::Mat randomMean{};
 	cv::Mat randomStandatrDeviation{};
-	int quantityCorrelationCoefficients{};
 
 	float sigmaForGaus(float const sigmaForRandomCoeficients);
 	cv::Mat generateSimpelRandomField(cv::Mat const gausRandomFields);
+	void changeMeanInRandomFields(cv::Mat& inOutputImage, float const newMean);
 public:
-	SimpelTwiceRandomModel(cv::Size* const imageSize, int quantityCorrelationCoefficients);
+	SimpelTwiceRandomModel(cv::Size* const imageSize, std::vector<float>* correlationCoefficients);
 	void generateGausRandomFields(std::vector<float>* const sigmaForRandomCoeficients);
 	void generateRandomCorrelationCoefficients();
 	void generateRandomMean();
 	void generateRandomStandatrDeviation();
+	void changeMeanInRandomMean(float const newMean);
+	void changeMeanInStandatrDeviation(float const newMean);
+	cv::Mat generateMainImage();
+	cv::Mat generateStandartMainImage();
+	cv::Mat generateStandartMainImage(std::vector<float>* const sigmaForRandomCorrelationCoeficients,
+										float const sigmaForRandomMean, 
+										float const sigmaForRandomStdDeviation, 
+										float const meanForRandomMean,
+										float const meanForRandomStdDeviation,
+										float const sigmaForMainImage,
+										bool const normolizeImage = true);
+	cv::Mat normolizeImage(cv::Mat& inOutputImage);
+	std::vector<cv::Mat> getRandomCorrelationCoefficients() const;
 };
 
