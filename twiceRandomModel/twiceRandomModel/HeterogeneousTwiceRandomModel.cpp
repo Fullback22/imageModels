@@ -105,13 +105,13 @@ cv::Mat HeterogeneousTwiceRandomModel::generateStandartMainImage()
 		sko = sigmaForGaus(sko);
 	}
 	generateGausRandomFields(&sigmaForRandomCoeficients);
-	generateRandomCorrelationCoefficients(33);
+	generateRandomCorrelationCoefficients(30);
 	sigmaForRandomCoeficients.clear();
 	sigmaForRandomCoeficients.push_back(1);
 	sigmaForRandomCoeficients[0] = sigmaForGaus(sigmaForRandomCoeficients[0]);
 	generateGausRandomFields(&sigmaForRandomCoeficients);
-	generateRandomMean(33);
-	generateRandomStandatrDeviation(33);
+	generateRandomMean(30);
+	generateRandomStandatrDeviation(30);
 	changeMeanInRandomMean(0.9);
 	changeMeanInStandatrDeviation(0.9);
 	sigmaForRandomCoeficients[0] = 1;
