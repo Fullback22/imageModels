@@ -8,13 +8,13 @@
 
 class SimpelTwiceRandomModel
 {
+protected:
 	std::vector<float> correlationCoefficients{};
 	cv::Size imageSize{};
 	std::vector<cv::Mat> gausRandomFields{};
 	std::vector<cv::Mat> randomCorrelationCoefficients{};
 	cv::Mat randomMean{};
 	cv::Mat randomStandatrDeviation{};
-
 	float sigmaForGaus(float const sigmaForRandomCoeficients);
 	cv::Mat generateSimpelRandomField(cv::Mat const gausRandomFields);
 	void changeMeanInRandomFields(cv::Mat& inOutputImage, float const newMean);

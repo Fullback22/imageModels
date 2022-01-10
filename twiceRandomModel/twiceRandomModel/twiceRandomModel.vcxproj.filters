@@ -21,9 +21,15 @@
     <ClCompile Include="SimpelTwiceRandomModel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="HeterogeneousTwiceRandomModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SimpelTwiceRandomModel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HeterogeneousTwiceRandomModel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

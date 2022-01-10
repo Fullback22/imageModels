@@ -14,16 +14,16 @@ SimpelTwiceRandomModel::SimpelTwiceRandomModel(cv::Size* const imageSize_, std::
 	correlationCoefficients.assign(correlationCoefficients_->begin(), correlationCoefficients_->end());
 }
 
-void SimpelTwiceRandomModel::generateGausRandomFields(std::vector<float>* const sigmaForRandomCoeficients)
+void SimpelTwiceRandomModel::generateGausRandomFields(std::vector<float>* const SKO)
 {
 	gausRandomFields.clear();
-	for (int z{ 0 }; z < sigmaForRandomCoeficients->size(); ++z)
+	for (int z{ 0 }; z < SKO->size(); ++z)
 	{
-		float SKO{ sigmaForGaus((*sigmaForRandomCoeficients)[z]) };
+		//float SKO{ sigmaForGaus((*sigmaForRandomCoeficients)[z]) };
 		cv::Mat buferImage{ imageSize, CV_32FC1 };
 		static std::random_device rd;
 		static std::mt19937 gen(rd());
-		std::normal_distribution<float> dist(0, SKO);
+		std::normal_distribution<float> dist(0, (*SKO)[z]);
 		for (int i{ 0 }; i < imageSize.height; ++i)
 		{
 			for (int j{ 0 }; j < imageSize.width; ++j)
@@ -99,10 +99,15 @@ cv::Mat SimpelTwiceRandomModel::generateMainImage()
 cv::Mat SimpelTwiceRandomModel::generateStandartMainImage()
 {
 	std::vector<float> sigmaForRandomCoeficients{ 0.2, 0.2 };
+	for (auto &sko : sigmaForRandomCoeficients)
+	{
+		sko = sigmaForGaus(sko);
+	}
 	generateGausRandomFields(&sigmaForRandomCoeficients);
 	generateRandomCorrelationCoefficients();
 	sigmaForRandomCoeficients.clear();
 	sigmaForRandomCoeficients.push_back(0.2);
+	sigmaForRandomCoeficients[0] = sigmaForGaus(sigmaForRandomCoeficients[0]);
 	generateGausRandomFields(&sigmaForRandomCoeficients);
 	generateRandomMean();
 	generateRandomStandatrDeviation();
@@ -122,19 +127,30 @@ cv::Mat SimpelTwiceRandomModel::generateStandartMainImage(std::vector<float>* co
 															float const sigmaForMainImage, 
 															bool const normolizeImage_)
 {
-	std::vector<float> sigmaForRandomCoeficients{ 0.2, 0.2 };
-	generateGausRandomFields(sigmaForRandomCorrelationCoeficients);
+	std::vector<float> sigmaForRandomCoeficients{ *sigmaForRandomCorrelationCoeficients };
+	for (auto& sko : sigmaForRandomCoeficients)
+	{
+		sko = sigmaForGaus(sko);
+	}
+	generateGausRandomFields(&sigmaForRandomCoeficients);
 	generateRandomCorrelationCoefficients();
 	sigmaForRandomCoeficients.clear();
+
 	sigmaForRandomCoeficients.push_back(sigmaForRandomMean);
+	sigmaForRandomCoeficients[0] = sigmaForGaus(sigmaForRandomCoeficients[0]);
 	generateGausRandomFields(&sigmaForRandomCoeficients);
 	generateRandomMean();
+
 	sigmaForRandomCoeficients[0] = sigmaForRandomStdDeviation;
+	sigmaForRandomCoeficients[0] = sigmaForGaus(sigmaForRandomCoeficients[0]);
 	generateGausRandomFields(&sigmaForRandomCoeficients);
 	generateRandomStandatrDeviation();
+
 	changeMeanInRandomMean(meanForRandomMean);
 	changeMeanInStandatrDeviation(meanForRandomStdDeviation);
+
 	sigmaForRandomCoeficients[0] = sigmaForMainImage;
+	sigmaForRandomCoeficients[0] = sigmaForGaus(sigmaForRandomCoeficients[0]);
 	generateGausRandomFields(&sigmaForRandomCoeficients);
 	cv::Mat bufer{ generateMainImage() };
 	if(normolizeImage_)
@@ -189,5 +205,4 @@ cv::Mat SimpelTwiceRandomModel::generateSimpelRandomField(cv::Mat const gausRand
 		}
 	}
 	return buferImage;
-
 }

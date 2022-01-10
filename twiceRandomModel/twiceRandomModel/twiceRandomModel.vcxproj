@@ -142,10 +142,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="HeterogeneousTwiceRandomModel.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SimpelTwiceRandomModel.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="HeterogeneousTwiceRandomModel.h" />
     <ClInclude Include="SimpelTwiceRandomModel.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
