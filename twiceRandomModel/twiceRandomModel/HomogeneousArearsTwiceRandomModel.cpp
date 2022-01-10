@@ -1,11 +1,11 @@
-#include "HeterogeneousTwiceRandomModel.h"
+#include "HomogeneousArearsTwiceRandomModel.h"
 
-float HeterogeneousTwiceRandomModel::quantization(float const value, float const gama)
+float HomogeneousArearsTwiceRandomModel::quantization(float const value, float const gama)
 {
 	return (round(value * gama)) / gama;
 }
 
-cv::Mat HeterogeneousTwiceRandomModel::generateSimpelRandomField(cv::Mat const gausRandomFields, float const gama)
+cv::Mat HomogeneousArearsTwiceRandomModel::generateSimpelRandomField(cv::Mat const gausRandomFields, float const gama)
 {
 	cv::Mat buferImage{ imageSize, CV_32FC1 };
 	float newValue{ gausRandomFields.at<float>(0, 0) };
@@ -35,12 +35,12 @@ cv::Mat HeterogeneousTwiceRandomModel::generateSimpelRandomField(cv::Mat const g
 	return buferImage;
 }
 
-HeterogeneousTwiceRandomModel::HeterogeneousTwiceRandomModel(cv::Size* const imageSize, std::vector<float>* correlationCoefficients):
+HomogeneousArearsTwiceRandomModel::HomogeneousArearsTwiceRandomModel(cv::Size* const imageSize, std::vector<float>* correlationCoefficients):
 	SimpelTwiceRandomModel(imageSize, correlationCoefficients)
 {
 }
 
-void HeterogeneousTwiceRandomModel::generateRandomCorrelationCoefficients(float const gama)
+void HomogeneousArearsTwiceRandomModel::generateRandomCorrelationCoefficients(float const gama)
 {
 	for (int i{ 0 }; i < gausRandomFields.size(); ++i)
 	{
@@ -49,17 +49,17 @@ void HeterogeneousTwiceRandomModel::generateRandomCorrelationCoefficients(float 
 	}
 }
 
-void HeterogeneousTwiceRandomModel::generateRandomMean(float const gama)
+void HomogeneousArearsTwiceRandomModel::generateRandomMean(float const gama)
 {
 	randomMean = generateSimpelRandomField(gausRandomFields[0], gama);
 }
 
-void HeterogeneousTwiceRandomModel::generateRandomStandatrDeviation(float const gama)
+void HomogeneousArearsTwiceRandomModel::generateRandomStandatrDeviation(float const gama)
 {
 	randomStandatrDeviation = generateSimpelRandomField(gausRandomFields[0], gama);
 }
 
-cv::Mat HeterogeneousTwiceRandomModel::generateMainImage(float const gama)
+cv::Mat HomogeneousArearsTwiceRandomModel::generateMainImage(float const gama)
 {
 	cv::Mat buferImage{ imageSize, CV_32FC1 };
 	cv::Mat asd{ gausRandomFields[0] };
@@ -97,7 +97,7 @@ cv::Mat HeterogeneousTwiceRandomModel::generateMainImage(float const gama)
 	return buferImage;
 }
 
-cv::Mat HeterogeneousTwiceRandomModel::generateStandartMainImage()
+cv::Mat HomogeneousArearsTwiceRandomModel::generateStandartMainImage()
 {
 	std::vector<float> sigmaForRandomCoeficients{ 0.2, 0.2 };
 	for (auto& sko : sigmaForRandomCoeficients)
@@ -122,7 +122,7 @@ cv::Mat HeterogeneousTwiceRandomModel::generateStandartMainImage()
 	return bufer;
 }
 
-cv::Mat HeterogeneousTwiceRandomModel::generateStandartMainImage(std::vector<float>* const sigmaForRandomCorrelationCoeficients, 
+cv::Mat HomogeneousArearsTwiceRandomModel::generateStandartMainImage(std::vector<float>* const sigmaForRandomCorrelationCoeficients,
 																float const sigmaForRandomMean, 
 																float const sigmaForRandomStdDeviation, 
 																float const meanForRandomMean, 

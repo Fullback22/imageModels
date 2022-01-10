@@ -19,7 +19,6 @@ void SimpelTwiceRandomModel::generateGausRandomFields(std::vector<float>* const 
 	gausRandomFields.clear();
 	for (int z{ 0 }; z < SKO->size(); ++z)
 	{
-		//float SKO{ sigmaForGaus((*sigmaForRandomCoeficients)[z]) };
 		cv::Mat buferImage{ imageSize, CV_32FC1 };
 		static std::random_device rd;
 		static std::mt19937 gen(rd());

@@ -1,13 +1,13 @@
 #pragma once
 #include "SimpelTwiceRandomModel.h"
 
-class HeterogeneousTwiceRandomModel :
+class HomogeneousArearsTwiceRandomModel :
     public SimpelTwiceRandomModel
 {
     float quantization(float const value, float const gama);
     cv::Mat generateSimpelRandomField(cv::Mat const gausRandomFields, float const gama);
 public:
-    HeterogeneousTwiceRandomModel(cv::Size* const imageSize, std::vector<float>* correlationCoefficients);
+    HomogeneousArearsTwiceRandomModel(cv::Size* const imageSize, std::vector<float>* correlationCoefficients);
     void generateRandomCorrelationCoefficients(float const gama);
     void generateRandomMean(float const gama);
     void generateRandomStandatrDeviation(float const gama);
