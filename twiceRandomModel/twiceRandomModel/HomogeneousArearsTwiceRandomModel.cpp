@@ -105,7 +105,7 @@ cv::Mat HomogeneousArearsTwiceRandomModel::generateStandartMainImage()
 		sko = sigmaForGaus(sko);
 	}
 	generateGausRandomFields(&sigmaForRandomCoeficients);
-	generateRandomCorrelationCoefficients(30);
+	generateRandomCorrelationCoefficients(3.3);
 	sigmaForRandomCoeficients.clear();
 	sigmaForRandomCoeficients.push_back(1);
 	sigmaForRandomCoeficients[0] = sigmaForGaus(sigmaForRandomCoeficients[0]);

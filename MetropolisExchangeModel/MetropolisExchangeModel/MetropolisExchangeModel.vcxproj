@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{6429e48a-ef81-4170-9cd1-1729a77df2c0}</ProjectGuid>
-    <RootNamespace>twiceRandomModel</RootNamespace>
+    <ProjectGuid>{4acd83d5-5232-4e4b-923a-71ef26c41132}</ProjectGuid>
+    <RootNamespace>MetropolisExchangeModel</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -122,7 +122,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\opencv15\opencv\build\x64\vc15\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opencv_world440d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies);opencv_world440d.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -142,15 +142,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="HeterogeneousTwiceRandomModel.cpp" />
-    <ClCompile Include="HomogeneousArearsTwiceRandomModel.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="SimpelTwiceRandomModel.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="HeterogeneousTwiceRandomModel.h" />
-    <ClInclude Include="HomogeneousArearsTwiceRandomModel.h" />
-    <ClInclude Include="SimpelTwiceRandomModel.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

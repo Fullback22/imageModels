@@ -2,6 +2,7 @@
 
 #include "SimpelTwiceRandomModel.h"
 #include "HomogeneousArearsTwiceRandomModel.h"
+#include "HeterogeneousTwiceRandomModel.h"
 
 int main()
 {
@@ -9,6 +10,7 @@ int main()
 	cv::Size imageSize{ 600, 400 };
 	SimpelTwiceRandomModel firstModel{ &imageSize, &correletionCoefficient };
 	HomogeneousArearsTwiceRandomModel secondModel{ &imageSize, &correletionCoefficient };
+	HeterogeneousTwiceRandomModel therdModel{ &imageSize, &correletionCoefficient };
 
 	std::vector<float> sigmaForRandomCorrelationCoeficients{ 0.2, 0.2 };
 	float const sigmaForRandomMean{ 1 };
@@ -29,7 +31,7 @@ int main()
 														sigmaForMainImage,
 														normolizeImage) };*/
 
-	cv::Mat qwe{ secondModel.generateStandartMainImage(&sigmaForRandomCorrelationCoeficients,
+	/*cv::Mat qwe{ secondModel.generateStandartMainImage(&sigmaForRandomCorrelationCoeficients,
 														sigmaForRandomMean,
 														sigmaForRandomStdDeviation,
 														meanForRandomMean,
@@ -38,8 +40,10 @@ int main()
 														quantizationGammaForCorrelationCoeficients,
 														quantizationGammaForMeanAndStdDeviation,
 														quantizationGammaForMainImage,
-														normolizeImage) }; 
+														normolizeImage) }; */
 
+	cv::Mat qwe1{ therdModel.generateStandartMainImage() };
+	cv::Mat qwe{ secondModel.generateStandartMainImage() };
 	std::vector<cv::Mat> randomCorrelationCoeficients{ secondModel.getRandomCorrelationCoefficients() };
 	for (auto& image : randomCorrelationCoeficients)
 	{
@@ -48,7 +52,7 @@ int main()
 	}
 	cv::imshow("Correlation0", randomCorrelationCoeficients[0]);
 	cv::imshow("Correlation1", randomCorrelationCoeficients[1]);
-	cv::imshow("image", qwe);
+	cv::imshow("image", qwe1);
 	cv::waitKey();
 	return 0;
 }
