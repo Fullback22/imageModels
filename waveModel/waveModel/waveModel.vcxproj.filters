@@ -18,18 +18,12 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GibsModel.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BlockGibsModel.cpp">
+    <ClCompile Include="WaveModel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GibsModel.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BlockGibsModel.h">
+    <ClInclude Include="WaveModel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

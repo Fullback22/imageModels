@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{183775c1-6d91-4429-8258-a95febfcdcfa}</ProjectGuid>
-    <RootNamespace>GibsModel</RootNamespace>
+    <ProjectGuid>{1299f63b-f070-4c0e-a504-44fec2a42a84}</ProjectGuid>
+    <RootNamespace>waveModel</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -142,13 +142,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BlockGibsModel.cpp" />
-    <ClCompile Include="GibsModel.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="WaveModel.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BlockGibsModel.h" />
-    <ClInclude Include="GibsModel.h" />
+    <ClInclude Include="WaveModel.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
