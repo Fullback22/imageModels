@@ -9,16 +9,18 @@
 
 class MarkovFields
 {
-	cv::Size imageSize{};
-	std::random_device rd;
-	std::mt19937 gen{};
-	std::vector<std::vector<int>> conditionalTransitions{};
+	cv::Size imageSize_{};
+	std::random_device rd_{};
+	std::mt19937 generator_{ rd_() };
+	std::vector<std::vector<int>> conditionalTransitions_;
 
-	int getNewValue(std::vector<int>* frequncys);
+	int getNewValue(const std::vector<int>& frequncys);
 public:
-	MarkovFields(cv::Size const* imageSize);
+	MarkovFields();
+	MarkovFields(const cv::Size& imageSize);
+	MarkovFields& operator=(const MarkovFields& drop);
 	void initConditionalTransitions(int const transitionsStep);
-	void setConditionalTransitions(std::vector<std::vector<int>> *conditionalTransitions);
+	void setConditionalTransitions(const std::vector<std::vector<int>> &conditionalTransitions);
 	cv::Mat generateStandartMainImage();
 };
 

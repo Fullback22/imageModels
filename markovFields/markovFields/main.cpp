@@ -11,37 +11,48 @@
 
 int main()
 {
-	cv::Size imageSize{ 600,400 };
-	cv::Size blockSize{ 16,16 };
+	size_t quantityImage{ 2 };
+	size_t startNumber{ 159 };
 
 	
-	cv::Mat mainImage{ imageSize, CV_8UC1 };
-	std::vector<std::vector<int>> conditionalTransitions;
-	int transitionsStep{ 10 };
-	for (int i{ 0 }; i < 255; ++i)
-	{
-		conditionalTransitions.push_back(std::vector<int>(255,0));
-		int transitionsFreqences{ 255 };
-		for (int j{ i }; j < 255 && transitionsFreqences > 0; ++j)
-		{
-			conditionalTransitions[i][j] = transitionsFreqences;
-			transitionsFreqences -= transitionsStep;
-		}
-		transitionsFreqences = 255;
-		for (int j{ i }; j >= 0 && transitionsFreqences > 0; --j)
-		{
-			conditionalTransitions[i][j] = transitionsFreqences;
-			transitionsFreqences -= transitionsStep;
-		}
-	}
-	//MarkovFields markov(&imageSize);
-	//markov.initConditionalTransitions(10);
-	//markov.setConditionalTransitions(&conditionalTransitions);
-	BlockMarkovModel blockMarkov{ &imageSize, &blockSize };
-	cv::Mat test{ blockMarkov.generateStandartMainImage() };
+	int quantityClasses{ 3 };
+	std::vector<std::vector<int>> conditionalTransitions(quantityClasses);
 	
-	cv::imwrite("blockMarkovImage.png", test);
-	cv::imshow("image", test);
-	cv::waitKey();
+	conditionalTransitions[0] = std::vector<int>{ 3,2,1 };
+	conditionalTransitions[1] = std::vector<int>{ 3,2,1 };
+	conditionalTransitions[2] = std::vector<int>{ 3,2,1 };
+	//conditionalTransitions[3] = std::vector<int>{ 1,2,3,4 };
+	//conditionalTransitions[4] = std::vector<int>{ 1,2,4,5,5 };
+
+	std::uniform_int_distribution<> blockSizeDistr{ 4, 12 };
+	std::vector<int> imageWidth{ 640, 800, 960, 1024, 1280, 1280, 1600, 1920, 2048 };
+	std::vector<int> imageHeigth{ 480, 600, 540, 600, 720, 1024, 900, 1080, 1080 };
+	int quantityOfSize{ static_cast<int>(imageHeigth.size()) };
+	std::uniform_int_distribution<> imageSizeDistr{ 0, quantityOfSize - 1 };
+	std::random_device rd_{};
+	std::mt19937 generator{ rd_() };
+	for (size_t i{}; i < quantityImage; ++i)
+	{
+		int numberOfImageSize{ imageSizeDistr(generator) };
+		
+		cv::Size blockSize{ blockSizeDistr(generator), blockSizeDistr(generator) };
+		//MarkovFields markov{ cv::Size{ imageWidth[numberOfImageSize], imageHeigth[numberOfImageSize] } };
+		//markov.setConditionalTransitions(conditionalTransitions);
+		BlockMarkovModel blockMarkov{ cv::Size{imageWidth[numberOfImageSize], imageHeigth[numberOfImageSize]}, blockSize };
+		cv::Mat resultImage{ blockMarkov.generateStandartMainImage(conditionalTransitions) };
+		
+		int step{ 20 };
+		for (int i{ 0 }; i < imageHeigth[numberOfImageSize]; ++i)
+		{
+			for (int j{ 0 }; j < imageWidth[numberOfImageSize]; ++j)
+			{
+				resultImage.at<uchar>(i, j) = resultImage.at<uchar>(i, j) * step;
+			}
+		}
+
+		size_t imageNumber{ startNumber + i };
+		cv::imwrite("blockMarkovModel/blockMarkovModel_" + std::to_string(imageNumber) + ".png", resultImage);
+		std::cout << imageNumber << std::endl;
+	}
 	return 0;
 }

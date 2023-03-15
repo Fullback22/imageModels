@@ -3,16 +3,15 @@
 
 class BlockMarkovModel
 {
-	cv::Mat map{};
-	cv::Size imageSize{};
-	cv::Size blockSize{};
-	MarkovFields mapGenerator;
+	cv::Mat map_{};
+	cv::Size imageSize_{};
+	cv::Size blockSize_{};
+	MarkovFields mapGenerator_{};
 	void generateMap(int const transitionsStep);
-	void generateMap(std::vector<std::vector<int>>* conditionalTransitions);
+	void generateMap(const std::vector<std::vector<int>>& conditionalTransitions);
 public:
-	BlockMarkovModel(cv::Size const* imageSize, cv::Size const* blockSize);
-	cv::Mat generateStandartMainImage();
-	cv::Mat generateStandartMainImage(int const transitionsStep);
-	cv::Mat generateStandartMainImage(std::vector<std::vector<int>>* conditionalTransitions);
+	BlockMarkovModel(const cv::Size& imageSize, const cv::Size& blockSize);
+	cv::Mat generateStandartMainImage(int const transitionsStep = 10);
+	cv::Mat generateStandartMainImage(const std::vector<std::vector<int>>& conditionalTransitions);
 };
 

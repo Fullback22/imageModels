@@ -9,12 +9,12 @@
 
 class GibsModel
 {
-	cv::Size imageSize{};
-	cv::Mat mainImage{};
-	std::random_device rd;
-	std::mt19937 gen;
-	int quantityClasses{};
-	std::vector<std::vector<int>> propabilityMap{};
+	cv::Size imageSize_{};
+	cv::Mat mainImage_{};
+	std::random_device rd_;
+	std::mt19937 gen_;
+	int quantityClasses_{};
+	std::vector<std::vector<int>> propabilityMap_{};
 	
 	int getValueFromPropabilityMap(int const firstClass, int const secondClass) const;
 	int generateNewValue(std::vector<int>* const ProbabilityDensity);
@@ -37,7 +37,7 @@ class GibsModel
 	void generatePart8();
 	void generatePart9();
 public:
-	GibsModel(cv::Size const imageSize);
+	GibsModel(const cv::Size &imageSize);
 	void setPropabilityMap(std::vector<std::vector<int>>* const propabilityMap);
 	void initMainImage(std::vector<int>* frequencyClasses);
 	void generateMainImage(int const iteration=100, bool showresult = false);

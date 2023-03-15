@@ -75,6 +75,7 @@ int main()
 		cv::waitKey(20);
 	}
 	cv::normalize(mainImage, mainImage, 1.0, 0.0, cv::NORM_MINMAX);
+	cv::imwrite("image_.png", mainImage);
 	cv::imshow("image", mainImage);
 	cv::waitKey();
 	return 0;
