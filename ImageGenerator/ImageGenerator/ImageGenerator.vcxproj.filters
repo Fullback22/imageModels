@@ -49,7 +49,10 @@
     <ClCompile Include="Models\Parametrs\GausModelParametrs.cpp">
       <Filter>Models\Parametrs</Filter>
     </ClCompile>
-    <ClCompile Include="IModelParametrsUiBilder.cpp">
+    <ClCompile Include="BaseModelParametrsUiBilder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GausUiBilder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -66,5 +69,13 @@
     <ClInclude Include="IModelParametrsUiBilder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BaseModelParametrsUiBilder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="GausUiBilder.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
 </Project>

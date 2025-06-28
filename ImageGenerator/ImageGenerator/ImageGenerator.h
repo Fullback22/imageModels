@@ -3,6 +3,8 @@
 #include <QtWidgets/QWidget>
 #include "ui_ImageGenerator.h"
 
+#include "GausUiBilder.h"
+
 class ImageGenerator : public QWidget
 {
     Q_OBJECT
@@ -10,7 +12,7 @@ class ImageGenerator : public QWidget
 public:
     ImageGenerator(QWidget *parent = nullptr);
     ~ImageGenerator();
-
+    GausUiBilder test{};
 private:
     Ui::ImageGeneratorClass ui;
 };

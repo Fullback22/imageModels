@@ -1,11 +1,15 @@
 #pragma once
-class IModelParametrsUiBilder
+#include <qwidget.h>
+#include <qlayout.h>
+#include "Models/Parametrs/IModelParametrs.h"
+
+class IModelParametrsUiBilder:public QWidget
 {
 public:
 	virtual ~IModelParametrsUiBilder() {};
-	virtual void creatUi() = 0;
+	virtual void creatUi(QVBoxLayout& targetLayout) = 0;
 	virtual void toDefault() = 0;
 	virtual void clear() = 0;
-
+	virtual void setModel(const IModelParametrs* modelParametrs) = 0;
 };
 
