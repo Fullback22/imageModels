@@ -4,13 +4,17 @@
 
 class BlockGibsModel
 {
-	cv::Mat map{};
-	cv::Size imageSize{};
-	cv::Size blockSize{};
-	GibsModel mapGenerator;
-	void generateMap(std::vector<int>* const startFrequency, std::vector<std::vector<int>>* const propabilityMap, int const maxIter);
+	cv::Mat map_{};
+	cv::Size imageSize_{};
+	cv::Size blockSize_{};
+	GibsModel mapGenerator_{};
+	void generateMap(const std::vector<int>& startFrequency, const std::vector<std::vector<int>>& propabilityMap, int const maxIter);
 public:
-	BlockGibsModel(cv::Size const* imageSize, cv::Size const * blockSize);
+	BlockGibsModel(const cv::Size& imageSize, const cv::Size& blockSize);
 	cv::Mat generateStandartMainImage();
+	cv::Mat generateStandartMainImage(const std::vector<int>& startFrequency,
+									const std::vector<std::vector<int>>& propabilityMap,
+									int const maxIter,
+									bool showResult);
 };
 

@@ -11,7 +11,7 @@
 
 int main()
 {
-	size_t quantityImage{ 2 };
+	size_t quantityImage{ 5 };
 	size_t startNumber{ 159 };
 
 	

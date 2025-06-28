@@ -17,7 +17,7 @@ class GibsModel
 	std::vector<std::vector<int>> propabilityMap_{};
 	
 	int getValueFromPropabilityMap(int const firstClass, int const secondClass) const;
-	int generateNewValue(std::vector<int>* const ProbabilityDensity);
+	int generateNewValue(const std::vector<int>& ProbabilityDensity);
 	std::vector<int> computeProbabilityDensity1(int const x, int const y);
 	std::vector<int> computeProbabilityDensity2(int const x, int const y);
 	std::vector<int> computeProbabilityDensity3(int const x, int const y);
@@ -37,14 +37,15 @@ class GibsModel
 	void generatePart8();
 	void generatePart9();
 public:
+	GibsModel();
 	GibsModel(const cv::Size &imageSize);
-	void setPropabilityMap(std::vector<std::vector<int>>* const propabilityMap);
-	void initMainImage(std::vector<int>* frequencyClasses);
+	void setPropabilityMap(const std::vector<std::vector<int>>& propabilityMap);
+	void initMainImage(const std::vector<int>& frequencyClasses);
 	void generateMainImage(int const iteration=100, bool showresult = false);
 	void showResult();
 	cv::Mat generateStandartMainImage();
-	cv::Mat generateStandartMainImage(std::vector<int>* const startFrequency,
-									std::vector<std::vector<int>>* const propabilityMap,
+	cv::Mat generateStandartMainImage(const std::vector<int>& startFrequency,
+									const std::vector<std::vector<int>>& propabilityMap,
 									int const maxIter,
 									bool showResult);
 	cv::Mat getMainImage() const;

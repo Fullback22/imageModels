@@ -5,15 +5,15 @@ int GibsModel::getValueFromPropabilityMap(int const firstClass, int const second
 	return propabilityMap_[firstClass][secondClass];
 }
 
-int GibsModel::generateNewValue(std::vector<int>* const ProbabilityDensity)
+int GibsModel::generateNewValue(const std::vector<int>& ProbabilityDensity)
 {
-	int allValue{ std::accumulate(ProbabilityDensity->begin(),ProbabilityDensity->end(),0) };
+	int allValue{ std::accumulate(ProbabilityDensity.begin(),ProbabilityDensity.end(),0) };
 	std::uniform_int_distribution<> initDist{ 0, quantityClasses_ - 1 };
 	std::uniform_real_distribution<> dis{ 0.0, 1.0 };
 	for (; ;)
 	{
 		int newValue{ initDist(gen_) };
-		double propabilityNewValue{ static_cast<double>((*ProbabilityDensity)[newValue]) / allValue };
+		double propabilityNewValue{ static_cast<double>(ProbabilityDensity[newValue]) / allValue };
 		double conversionPropability{ dis(gen_) };
 		if (conversionPropability < propabilityNewValue)
 		{
@@ -100,9 +100,9 @@ std::vector<int> GibsModel::computeProbabilityDensity9(int const x, int const y)
 	return startFrequency;
 }
 
-void GibsModel::initMainImage(std::vector<int>* frequencyClasses)
+void GibsModel::initMainImage(const std::vector<int>& frequencyClasses)
 {
-	std::discrete_distribution<int> initImageDist{ frequencyClasses->begin(), frequencyClasses->end() };
+	std::discrete_distribution<int> initImageDist{ frequencyClasses.begin(), frequencyClasses.end() };
 	for (int i{ 0 }; i < imageSize_.height; ++i)
 	{
 		for (int j{ 0 }; j < imageSize_.width; ++j)
@@ -117,7 +117,7 @@ void GibsModel::initMainImage(std::vector<int>* frequencyClasses)
 void GibsModel::generatePart1()
 {
 	std::vector<int> startFrenqce(computeProbabilityDensity1(0, 0));
-	mainImage_.at<uchar>(0, 0) = generateNewValue(&startFrenqce);
+	mainImage_.at<uchar>(0, 0) = generateNewValue(startFrenqce);
 }
 
 void GibsModel::generatePart2()
@@ -125,14 +125,14 @@ void GibsModel::generatePart2()
 	for (int i{ 1 }; i < imageSize_.width - 1; ++i)
 	{
 		std::vector<int> startFrenqce(computeProbabilityDensity2(i, 0));
-		mainImage_.at<uchar>(0, i) = generateNewValue(&startFrenqce);
+		mainImage_.at<uchar>(0, i) = generateNewValue(startFrenqce);
 	}
 }
 
 void GibsModel::generatePart3()
 {
 	std::vector<int> startFrenqce(computeProbabilityDensity3(imageSize_.width - 1, 0));
-	mainImage_.at<uchar>(0, imageSize_.width - 1) = generateNewValue(&startFrenqce);
+	mainImage_.at<uchar>(0, imageSize_.width - 1) = generateNewValue(startFrenqce);
 }
 
 void GibsModel::generatePart4()
@@ -140,14 +140,14 @@ void GibsModel::generatePart4()
 	for (int i{ 1 }; i < imageSize_.height - 1; ++i)
 	{
 		std::vector<int> startFrenqce(computeProbabilityDensity4(imageSize_.width - 1, i));
-		mainImage_.at<uchar>(i, imageSize_.width - 1) = generateNewValue(&startFrenqce);
+		mainImage_.at<uchar>(i, imageSize_.width - 1) = generateNewValue(startFrenqce);
 	}
 }
 
 void GibsModel::generatePart5()
 {
 	std::vector<int> startFrenqce(computeProbabilityDensity5(imageSize_.width - 1, imageSize_.height - 1));
-	mainImage_.at<uchar>(imageSize_.height - 1, imageSize_.width - 1) = generateNewValue(&startFrenqce);
+	mainImage_.at<uchar>(imageSize_.height - 1, imageSize_.width - 1) = generateNewValue(startFrenqce);
 }
 
 void GibsModel::generatePart6()
@@ -155,14 +155,14 @@ void GibsModel::generatePart6()
 	for (int i{ 1 }; i < imageSize_.width - 1; ++i)
 	{
 		std::vector<int> startFrenqce(computeProbabilityDensity6(i, imageSize_.height - 1));
-		mainImage_.at<uchar>(imageSize_.height - 1, i) = generateNewValue(&startFrenqce);
+		mainImage_.at<uchar>(imageSize_.height - 1, i) = generateNewValue(startFrenqce);
 	}
 }
 
 void GibsModel::generatePart7()
 {
 	std::vector<int> startFrenqce(computeProbabilityDensity7(0, imageSize_.height - 1));
-	mainImage_.at<uchar>(imageSize_.height - 1, 0) = generateNewValue(&startFrenqce);
+	mainImage_.at<uchar>(imageSize_.height - 1, 0) = generateNewValue(startFrenqce);
 }
 
 void GibsModel::generatePart8()
@@ -170,7 +170,7 @@ void GibsModel::generatePart8()
 	for (int i{ 1 }; i < imageSize_.height - 1; ++i)
 	{
 		std::vector<int> startFrenqce(computeProbabilityDensity8(0, i));
-		mainImage_.at<uchar>(i, 0) = generateNewValue(&startFrenqce);
+		mainImage_.at<uchar>(i, 0) = generateNewValue(startFrenqce);
 	}
 }
 
@@ -181,9 +181,14 @@ void GibsModel::generatePart9()
 		for (int i{ 1 }; i < imageSize_.height - 1; ++i)
 		{
 			std::vector<int> startFrenqce(computeProbabilityDensity9(j, i));
-			mainImage_.at<uchar>(i, j) = generateNewValue(&startFrenqce);
+			mainImage_.at<uchar>(i, j) = generateNewValue(startFrenqce);
 		}
 	}
+}
+
+GibsModel::GibsModel():
+	gen_{ rd_() }
+{
 }
 
 GibsModel::GibsModel(const cv::Size& imageSize):
@@ -193,9 +198,9 @@ GibsModel::GibsModel(const cv::Size& imageSize):
 {
 }
 
-void GibsModel::setPropabilityMap(std::vector<std::vector<int>>* const propabilityMap)
+void GibsModel::setPropabilityMap(const std::vector<std::vector<int>>& propabilityMap)
 {
-	propabilityMap_.assign(propabilityMap->begin(), propabilityMap->end());
+	propabilityMap_.assign(propabilityMap.begin(), propabilityMap.end());
 }
 
 void GibsModel::generateMainImage(int const iteration, bool showResult_)
@@ -241,19 +246,19 @@ cv::Mat GibsModel::generateStandartMainImage()
 	propabilityMap[2] = std::vector<int>{ 1,1,5,1 };
 	propabilityMap[3] = std::vector<int>{ 1,1,1,5 };
 
-	initMainImage(&startFrenqce);
-	setPropabilityMap(&propabilityMap);
+	initMainImage(startFrenqce);
+	setPropabilityMap(propabilityMap);
 	generateMainImage(1000, true);
 
 	return getMainImage();
 }
 
-cv::Mat GibsModel::generateStandartMainImage(std::vector<int>* const startFrequency, 
-											std::vector<std::vector<int>>* const propabilityMap, 
+cv::Mat GibsModel::generateStandartMainImage(const std::vector<int>& startFrequency, 
+											const std::vector<std::vector<int>>& propabilityMap, 
 											int const maxIter, 
 											bool showResult)
 {
-	quantityClasses_ = startFrequency->size();
+	quantityClasses_ = startFrequency.size();
 	initMainImage(startFrequency);
 	setPropabilityMap(propabilityMap);
 	generateMainImage(maxIter, showResult);
