@@ -101,16 +101,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="IModelParametrsUiBilder.cpp" />
+    <ClCompile Include="Models\Parametrs\GausModelParametrs.cpp" />
     <QtRcc Include="ImageGenerator.qrc" />
     <QtUic Include="ImageGenerator.ui" />
     <QtMoc Include="ImageGenerator.h" />
     <ClCompile Include="ImageGenerator.cpp" />
-    <ClCompile Include="IModelParametrs.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="IImageModel.h" />
-    <ClInclude Include="IModelParametrs.h" />
+    <ClInclude Include="IModelParametrsUiBilder.h" />
+    <ClInclude Include="Models\IImageModel.h" />
+    <ClInclude Include="Models\Parametrs\GausModelParametrs.h" />
+    <ClInclude Include="Models\Parametrs\IModelParametrs.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

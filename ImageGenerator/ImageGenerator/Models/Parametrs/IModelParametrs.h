@@ -3,6 +3,5 @@ class IModelParametrs
 {
 public:
 	virtual ~IModelParametrs() {};
-
 };
 

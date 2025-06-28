@@ -21,6 +21,12 @@
       <UniqueIdentifier>{639EADAA-A684-42e4-A9AD-28FC9BCB8F7C}</UniqueIdentifier>
       <Extensions>ts</Extensions>
     </Filter>
+    <Filter Include="Models">
+      <UniqueIdentifier>{579cb085-17ae-4515-bacb-ed00b4853fe4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Models\Parametrs">
+      <UniqueIdentifier>{41fdae20-ea58-4c0a-896f-b40e638a184d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="ImageGenerator.qrc">
@@ -40,15 +46,24 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="IModelParametrs.cpp">
+    <ClCompile Include="Models\Parametrs\GausModelParametrs.cpp">
+      <Filter>Models\Parametrs</Filter>
+    </ClCompile>
+    <ClCompile Include="IModelParametrsUiBilder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="IImageModel.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Models\IImageModel.h">
+      <Filter>Models</Filter>
     </ClInclude>
-    <ClInclude Include="IModelParametrs.h">
+    <ClInclude Include="Models\Parametrs\IModelParametrs.h">
+      <Filter>Models\Parametrs</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\Parametrs\GausModelParametrs.h">
+      <Filter>Models\Parametrs</Filter>
+    </ClInclude>
+    <ClInclude Include="IModelParametrsUiBilder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
