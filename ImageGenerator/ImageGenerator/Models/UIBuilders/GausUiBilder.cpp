@@ -7,6 +7,7 @@ GausUiBilder::~GausUiBilder()
 
 void GausUiBilder::creatUi(QVBoxLayout& targetLayout)
 {
+	BaseModelParametrsUiBilder::creatUi(targetLayout);
 	horLayout_medium = new QHBoxLayout();
 	targetLayout.addLayout(horLayout_medium);
 
@@ -35,6 +36,7 @@ void GausUiBilder::toDefault()
 {
 	if (isInit_)
 	{
+		BaseModelParametrsUiBilder::toDefault();
 		spBox_medium->setValue(100);
 		spBox_sko->setValue(5);
 	}
@@ -44,6 +46,7 @@ void GausUiBilder::clear()
 {
 	if (isInit_)
 	{
+		BaseModelParametrsUiBilder::clear();
 		label_medium->hide();
 		spBox_medium->hide();
 		horLayout_medium->removeWidget(label_medium);
@@ -71,6 +74,7 @@ void GausUiBilder::clear()
 
 void GausUiBilder::setModel(IModelParametrs* modelParametrs)
 {
+	BaseModelParametrsUiBilder::modelParametrs_ = modelParametrs;
 	modelParametrs_ = dynamic_cast<GausModelParametrs*>(modelParametrs);
 }
 

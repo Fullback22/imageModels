@@ -1,7 +1,4 @@
 #pragma once
-#include "qspinbox.h"
-#include "qlabel.h"
-
 #include "BaseModelParametrsUiBilder.h"
 #include "Models/Parametrs/GausModelParametrs.h"
 
@@ -25,4 +22,5 @@ protected slots:
 	void slot_updateMedium(int newValue);
 	void slot_updateSko(int newValue);
 };
+
 

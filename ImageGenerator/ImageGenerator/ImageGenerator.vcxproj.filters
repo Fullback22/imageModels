@@ -55,6 +55,12 @@
     <ClCompile Include="Models\UIBuilders\GausUiBilder.cpp">
       <Filter>Models\UiBuilders</Filter>
     </ClCompile>
+    <ClCompile Include="Models\GausModel.cpp">
+      <Filter>Models</Filter>
+    </ClCompile>
+    <ClCompile Include="Models\UIBuilders\BaseModelParametrsUiBilder.cpp">
+      <Filter>Models\UiBuilders</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Models\IImageModel.h">
@@ -66,15 +72,18 @@
     <ClInclude Include="Models\Parametrs\GausModelParametrs.h">
       <Filter>Models\Parametrs</Filter>
     </ClInclude>
-    <ClInclude Include="Models\UIBuilders\BaseModelParametrsUiBilder.h">
-      <Filter>Models\UiBuilders</Filter>
-    </ClInclude>
     <ClInclude Include="Models\UIBuilders\IModelParametrsUiBilder.h">
       <Filter>Models\UiBuilders</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\GausModel.h">
+      <Filter>Models</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Models\UIBuilders\GausUiBilder.h">
+      <Filter>Models\UiBuilders</Filter>
+    </QtMoc>
+    <QtMoc Include="Models\UIBuilders\BaseModelParametrsUiBilder.h">
       <Filter>Models\UiBuilders</Filter>
     </QtMoc>
   </ItemGroup>

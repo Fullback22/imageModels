@@ -3,8 +3,9 @@
 #include <QtWidgets/QWidget>
 #include "ui_ImageGenerator.h"
 
-#include "Models/IImageModel.h"
-#include "GausUiBilder.h"
+#include "Models/GausModel.h"
+#include "Models/UIBuilders/GausUiBilder.h"
+
 
 class ImageGenerator : public QWidget
 {
@@ -15,9 +16,13 @@ public:
     ~ImageGenerator();
 
     GausModelParametrs gParms{};
-    //QVector<IImageModel*> models;
+    QVector<IImageModel*> models{ new GausModel() };
     QVector<IModelParametrsUiBilder*> bilders{ new GausUiBilder() };
+    QVector<IModelParametrs*> parametrs{ new GausModelParametrs() };
     IModelParametrsUiBilder* mainUiBilder{};
+    IImageModel* mainModel{};
+    IModelParametrs* mainModelParamert{};
+
 private:
     Ui::ImageGeneratorClass ui;
 

@@ -21,10 +21,16 @@ ImageGenerator::~ImageGenerator()
 
 void ImageGenerator::slot_changeModel(int i)
 {
-    mainUiBilder->clear();
+    //mainUiBilder->clear();
     mainUiBilder = bilders[i];
-    mainUiBilder->setModel(&gParms);
+    mainModelParamert = parametrs[i];
+    mainModel = models[i];
+    mainUiBilder->setModel(mainModelParamert);
+    mainModel->setParametrs(mainModelParamert);
     mainUiBilder->creatUi(*(ui.vertLayout_modelGrBox));
     mainUiBilder->toDefault();
+    cv::Mat test{};
+    mainModel->generateImage(test);
+    int a;
 }
 
