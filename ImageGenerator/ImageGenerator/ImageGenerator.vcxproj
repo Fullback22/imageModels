@@ -101,9 +101,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BaseModelParametrsUiBilder.cpp" />
-    <ClCompile Include="GausUiBilder.cpp" />
     <ClCompile Include="Models\Parametrs\GausModelParametrs.cpp" />
+    <ClCompile Include="Models\UIBuilders\GausUiBilder.cpp" />
     <QtRcc Include="ImageGenerator.qrc" />
     <QtUic Include="ImageGenerator.ui" />
     <QtMoc Include="ImageGenerator.h" />
@@ -111,9 +110,9 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BaseModelParametrsUiBilder.h" />
-    <QtMoc Include="GausUiBilder.h" />
-    <ClInclude Include="IModelParametrsUiBilder.h" />
+    <ClInclude Include="Models\UIBuilders\BaseModelParametrsUiBilder.h" />
+    <ClInclude Include="Models\UIBuilders\IModelParametrsUiBilder.h" />
+    <QtMoc Include="Models\UIBuilders\GausUiBilder.h" />
     <ClInclude Include="Models\IImageModel.h" />
     <ClInclude Include="Models\Parametrs\GausModelParametrs.h" />
     <ClInclude Include="Models\Parametrs\IModelParametrs.h" />

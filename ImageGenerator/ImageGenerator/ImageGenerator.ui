@@ -19,7 +19,21 @@
      <item>
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
-        <widget class="QComboBox" name="cb_models"/>
+        <widget class="QComboBox" name="cb_models">
+         <property name="currentIndex">
+          <number>1</number>
+         </property>
+         <item>
+          <property name="text">
+           <string>Модель Гаусса</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Новый элемент</string>
+          </property>
+         </item>
+        </widget>
        </item>
        <item>
         <widget class="Line" name="line">

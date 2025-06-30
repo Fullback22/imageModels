@@ -27,6 +27,9 @@
     <Filter Include="Models\Parametrs">
       <UniqueIdentifier>{41fdae20-ea58-4c0a-896f-b40e638a184d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Models\UiBuilders">
+      <UniqueIdentifier>{8a250d39-ff7c-4d60-bff2-0211c1995862}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="ImageGenerator.qrc">
@@ -49,11 +52,8 @@
     <ClCompile Include="Models\Parametrs\GausModelParametrs.cpp">
       <Filter>Models\Parametrs</Filter>
     </ClCompile>
-    <ClCompile Include="BaseModelParametrsUiBilder.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GausUiBilder.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Models\UIBuilders\GausUiBilder.cpp">
+      <Filter>Models\UiBuilders</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -66,16 +66,16 @@
     <ClInclude Include="Models\Parametrs\GausModelParametrs.h">
       <Filter>Models\Parametrs</Filter>
     </ClInclude>
-    <ClInclude Include="IModelParametrsUiBilder.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Models\UIBuilders\BaseModelParametrsUiBilder.h">
+      <Filter>Models\UiBuilders</Filter>
     </ClInclude>
-    <ClInclude Include="BaseModelParametrsUiBilder.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Models\UIBuilders\IModelParametrsUiBilder.h">
+      <Filter>Models\UiBuilders</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="GausUiBilder.h">
-      <Filter>Header Files</Filter>
+    <QtMoc Include="Models\UIBuilders\GausUiBilder.h">
+      <Filter>Models\UiBuilders</Filter>
     </QtMoc>
   </ItemGroup>
 </Project>
