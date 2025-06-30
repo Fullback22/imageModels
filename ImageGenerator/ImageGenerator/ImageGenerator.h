@@ -1,6 +1,9 @@
 #pragma once
 
 #include <QtWidgets/QWidget>
+#include <qpixmap.h>
+#include <qfiledialog.h>
+#include <qdir.h>
 #include "ui_ImageGenerator.h"
 
 #include "Models/GausModel.h"
@@ -11,11 +14,9 @@ class ImageGenerator : public QWidget
 {
     Q_OBJECT
 
-public:
-    ImageGenerator(QWidget *parent = nullptr);
-    ~ImageGenerator();
+    QString savePath_{};
+    bool generationInProgress_{ false };
 
-    GausModelParametrs gParms{};
     QVector<IImageModel*> models{ new GausModel() };
     QVector<IModelParametrsUiBilder*> bilders{ new GausUiBilder() };
     QVector<IModelParametrs*> parametrs{ new GausModelParametrs() };
@@ -23,11 +24,21 @@ public:
     IImageModel* mainModel{};
     IModelParametrs* mainModelParamert{};
 
+public:
+    ImageGenerator(QWidget *parent = nullptr);
+    ~ImageGenerator();
+
 private:
     Ui::ImageGeneratorClass ui;
 
+    void showImage(const cv::Mat& image);
 
 private slots:
     void slot_changeModel(int i);
+    void slot_regenerateImage();
+    void slot_toDefualt();
+    void slot_openFileDialog();
+    void slot_changeSavePath(const QString& str);
+    void slot_startGenerate();
 };
 
