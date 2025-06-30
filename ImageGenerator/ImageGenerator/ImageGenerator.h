@@ -13,7 +13,10 @@ public:
     ImageGenerator(QWidget *parent = nullptr);
     ~ImageGenerator();
     GausUiBilder test{};
+
+    GausModelParametrs gParms{};
 private:
     Ui::ImageGeneratorClass ui;
+
 };
 

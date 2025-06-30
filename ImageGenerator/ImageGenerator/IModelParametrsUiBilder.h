@@ -10,6 +10,6 @@ public:
 	virtual void creatUi(QVBoxLayout& targetLayout) = 0;
 	virtual void toDefault() = 0;
 	virtual void clear() = 0;
-	virtual void setModel(const IModelParametrs* modelParametrs) = 0;
+	virtual void setModel(IModelParametrs* modelParametrs) = 0;
 };
 

@@ -8,6 +8,6 @@ public:
 	void creatUi(QVBoxLayout& targetLayout) override{};
 	void toDefault() override{};
 	void clear() override{};
-	void setModel(const IModelParametrs* modelParametrs) {};
+	void setModel(IModelParametrs* modelParametrs) {};
 };
 
