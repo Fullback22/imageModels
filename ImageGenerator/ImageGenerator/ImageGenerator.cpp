@@ -31,9 +31,40 @@ void ImageGenerator::showImage(const cv::Mat& image)
     ui.label_firstImage->setPixmap(QPixmap::fromImage(QImage(image.data, image.cols, image.rows, image.step, QImage::Format_Grayscale8)));
 }
 
+void ImageGenerator::addObject(cv::Mat& image, const QString& savePath)
+{
+    std::random_device rd{};
+    std::mt19937 generator{ rd() };
+    std::uniform_int_distribution<int> rotateAndel_dis{ 0,259 };
+    std::uniform_int_distribution<int> objSize_dis{ ui.spinBox_minSizeObject->value(),ui.spinBox_maxSizeObject->value() };
+    
+    //std::normal_distribution<float> dist(param_->medium, param_->sko);
+    for (size_t i{}; i < ui.spinBox_quantityObjects->value(); ++i)
+    {
+        int rotateAngel{ 0 };
+        if (ui.chBox_rotateObject->isChecked())
+        {
+            rotateAngel = rotateAndel_dis(generator);
+        }
+        int objectSize{ objSize_dis(generator) };
+        cv::RotatedRect darwRect{ cv::Point(0,0), cv::Size(objectSize, objectSize), rotateAngel };
+        if (ui.chBox_monochromeObject->isChecked())
+        {
+
+        }
+        else
+        {
+
+        }
+    }
+}
+
 void ImageGenerator::slot_regenerateImage()
 {
+    mainModel->computeParametrsForObject(mainObjectParamert, ui.spinBox_contrast->value());
     cv::Mat image{};
+    
+    
     mainModel->generateImage(image);
     showImage(image);
 }
@@ -60,6 +91,7 @@ void ImageGenerator::slot_startGenerate()
     QStringList files{ dir.entryList({ "*.png" }, QDir::Files) };
     int startNumber{ files.count() };
     setDisabled(true);
+    mainModel->computeParametrsForObject(mainObjectParamert, ui.spinBox_contrast->value());
     for (size_t i{}; i < ui.spBox_quantityImage->value(); ++i)
     {
         cv::Mat image{};
@@ -79,10 +111,11 @@ void ImageGenerator::slot_changeModel(int i)
         mainUiBilder->clear();
     }
     mainUiBilder = bilders[i];
-    mainModelParamert = parametrs[i];
+    mainBackgroundParamert = backgroundParametrs[i];
+    mainObjectParamert = objectParametrs[i];
     mainModel = models[i];
-    mainUiBilder->setModel(mainModelParamert);
-    mainModel->setParametrs(mainModelParamert);
+    mainUiBilder->setModel(mainBackgroundParamert);
+    mainModel->setParametrs(mainBackgroundParamert);
     mainUiBilder->creatUi(*(ui.vertLayout_modelGrBox));
     mainUiBilder->toDefault();
 }

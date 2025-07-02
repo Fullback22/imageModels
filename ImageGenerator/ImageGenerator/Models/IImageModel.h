@@ -12,5 +12,7 @@ public:
 	virtual ~IImageModel() {};
 	virtual void generateImage(cv::Mat& inOutImage) = 0;
 	virtual void setParametrs(IModelParametrs* parametsr) = 0;
+	virtual void computeParametrsForObject(IModelParametrs* parametsr, float contrast) = 0;
+	virtual int getMainObjectColor(float contrast) = 0;
 };
 

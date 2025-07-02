@@ -25,3 +25,16 @@ void GausModel::setParametrs(IModelParametrs* parametrs)
 {
 	param_ = dynamic_cast<GausModelParametrs*>(parametrs);
 }
+
+void GausModel::computeParametrsForObject(IModelParametrs* parametrs, float contrast)
+{
+	GausModelParametrs* buferParametsr{ dynamic_cast<GausModelParametrs*>(parametrs) };
+	buferParametsr->medium = param_->medium;
+	buferParametsr->medium *= contrast;
+	buferParametsr->sko = param_->sko;
+}
+
+int GausModel::getMainObjectColor(float contrast)
+{
+	return static_cast<int>(round(param_->medium * contrast));
+}

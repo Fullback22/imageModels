@@ -9,7 +9,9 @@ class GausModel :
 {
     GausModelParametrs* param_{};
 public:
-    virtual void generateImage(cv::Mat& inOutImage);
-    virtual void setParametrs(IModelParametrs* parametsr);
+    void generateImage(cv::Mat& inOutImage) override;
+    void setParametrs(IModelParametrs* parametsr) override;
+    void computeParametrsForObject(IModelParametrs* parametrs, float contrast) override;
+    int getMainObjectColor(float contrast) override;
 };
 

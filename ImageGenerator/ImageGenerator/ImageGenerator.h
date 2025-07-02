@@ -19,10 +19,12 @@ class ImageGenerator : public QWidget
 
     QVector<IImageModel*> models{ new GausModel() };
     QVector<IModelParametrsUiBilder*> bilders{ new GausUiBilder() };
-    QVector<IModelParametrs*> parametrs{ new GausModelParametrs() };
+    QVector<IModelParametrs*> backgroundParametrs{ new GausModelParametrs() };
+    QVector<IModelParametrs*> objectParametrs{ new GausModelParametrs() };
     IModelParametrsUiBilder* mainUiBilder{};
     IImageModel* mainModel{};
-    IModelParametrs* mainModelParamert{};
+    IModelParametrs* mainBackgroundParamert{};
+    IModelParametrs* mainObjectParamert{};
 
 public:
     ImageGenerator(QWidget *parent = nullptr);
@@ -32,7 +34,7 @@ private:
     Ui::ImageGeneratorClass ui;
 
     void showImage(const cv::Mat& image);
-
+    void addObject(cv::Mat& image, const QString& savePath);
 private slots:
     void slot_changeModel(int i);
     void slot_regenerateImage();
