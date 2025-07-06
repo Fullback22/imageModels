@@ -35,6 +35,7 @@ private:
 
     void showImage(const cv::Mat& image);
     void addObject(cv::Mat& image, const QString& savePath);
+    cv::Point getCenterXY(const cv::Size& imageSize, const cv::Size boundingSize);
 private slots:
     void slot_changeModel(int i);
     void slot_regenerateImage();

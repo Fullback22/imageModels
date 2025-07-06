@@ -1,6 +1,6 @@
 #pragma once
 #include "BaseModelParametrsUiBilder.h"
-#include "Models/Parametrs/GausModelParametrs.h"
+#include "../Parametrs/GausModelParametrs.h"
 
 class GausUiBilder :
     public BaseModelParametrsUiBilder

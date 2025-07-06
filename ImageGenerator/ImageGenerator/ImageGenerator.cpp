@@ -35,10 +35,11 @@ void ImageGenerator::addObject(cv::Mat& image, const QString& savePath)
 {
     std::random_device rd{};
     std::mt19937 generator{ rd() };
-    std::uniform_int_distribution<int> rotateAndel_dis{ 0,259 };
+    std::uniform_int_distribution<int> rotateAndel_dis{ 0,359 };
     std::uniform_int_distribution<int> objSize_dis{ ui.spinBox_minSizeObject->value(),ui.spinBox_maxSizeObject->value() };
     
-    //std::normal_distribution<float> dist(param_->medium, param_->sko);
+    cv::Mat maskForObjects{ image.size(), CV_8UC1, cv::Scalar(0) };
+    cv::Mat imageWithObjects{ image.size(), CV_8UC1, cv::Scalar(0) };
     for (size_t i{}; i < ui.spinBox_quantityObjects->value(); ++i)
     {
         int rotateAngel{ 0 };
@@ -47,16 +48,64 @@ void ImageGenerator::addObject(cv::Mat& image, const QString& savePath)
             rotateAngel = rotateAndel_dis(generator);
         }
         int objectSize{ objSize_dis(generator) };
-        cv::RotatedRect darwRect{ cv::Point(0,0), cv::Size(objectSize, objectSize), rotateAngel };
+        cv::RotatedRect drawRect{ cv::Point(100, 100), cv::Size(objectSize, objectSize), static_cast<float>(rotateAngel) };
+        cv::Rect boundingRect{ drawRect.boundingRect() };
+        drawRect.center = getCenterXY(image.size(), boundingRect.size());
+        boundingRect = drawRect.boundingRect();
+
+        cv::Point2f rectangelPoints_bufer[4];
+        drawRect.points(rectangelPoints_bufer);
+        std::vector<std::vector<cv::Point>> rectangels{ 4 };
+        std::vector<cv::Point> rectangelPoints{ 4 };
+        for (int i = 0; i < 4; ++i)
+            rectangelPoints[i] = rectangelPoints_bufer[i];
+        rectangels.push_back(rectangelPoints);
+
+        mainModel->setParametrs(mainObjectParamert);
+        
+        cv::fillPoly(maskForObjects, rectangels.back(), 255);
+
         if (ui.chBox_monochromeObject->isChecked())
         {
-
+            int color{ mainModel->getMainObjectColor(ui.spinBox_contrast->value()) };
+            cv::fillPoly(imageWithObjects, rectangels.back(), 0);
         }
         else
         {
+            mainObjectParamert->imageWidth = boundingRect.width;
+            mainObjectParamert->imageHeigth = boundingRect.height;
+            cv::Mat object{};
+            mainModel->generateImage(object);
+            
+            cv::Mat maskOlect(image.size(), CV_8UC1, cv::Scalar(255));
+            object.copyTo(maskOlect(boundingRect));
 
+            
+            
+            cv::bitwise_and(maskOlect, maskForObject, maskOlect);
+            
         }
+
     }
+    
+    
+            cv::bitwise_not(maskForObject, maskForObject);
+            cv::bitwise_and(image, maskForObject, image);
+            cv::bitwise_or(image, maskOlect, image);
+            int a{4};
+    mainModel->setParametrs(mainBackgroundParamert);
+}
+
+cv::Point ImageGenerator::getCenterXY(const cv::Size& imageSize, const cv::Size boundingSize)
+{
+    std::random_device rd{};
+    std::mt19937 generator{ rd() };
+    int widthOffset{ static_cast<int>(ceil(boundingSize.width / 2.0)) };
+    int heightOffset{ static_cast<int>(ceil(boundingSize.height / 2.0)) };
+    std::uniform_int_distribution<int> x_dis{ widthOffset, imageSize.width - widthOffset };
+    std::uniform_int_distribution<int> y_dis{ widthOffset, imageSize.height - widthOffset };
+
+    return cv::Point(x_dis(generator),y_dis(generator));
 }
 
 void ImageGenerator::slot_regenerateImage()
@@ -96,6 +145,7 @@ void ImageGenerator::slot_startGenerate()
     {
         cv::Mat image{};
         mainModel->generateImage(image);
+        addObject(image, savePath_);
         showImage(image);
         size_t imageNumber{ startNumber + i };
         QString saveName{ savePath_ + "img_" + QString::number(imageNumber) + ".png" };

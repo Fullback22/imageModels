@@ -1,7 +1,7 @@
 #pragma once
 #include <qwidget.h>
 #include <qlayout.h>
-#include "Models/Parametrs/IModelParametrs.h"
+#include "../Parametrs/IModelParametrs.h"
 
 class IModelParametrsUiBilder:public QWidget
 {
