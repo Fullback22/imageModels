@@ -39,6 +39,7 @@ void ImageGenerator::addObject(cv::Mat& image, const QString& savePath)
     std::uniform_int_distribution<int> objSize_dis{ ui.spinBox_minSizeObject->value(),ui.spinBox_maxSizeObject->value() };
     
     cv::Mat maskForObjects{ image.size(), CV_8UC1, cv::Scalar(0) };
+    cv::Mat maskObjects(image.size(), CV_8UC1, cv::Scalar(255));
     cv::Mat imageWithObjects{ image.size(), CV_8UC1, cv::Scalar(0) };
     for (size_t i{}; i < ui.spinBox_quantityObjects->value(); ++i)
     {
@@ -68,7 +69,7 @@ void ImageGenerator::addObject(cv::Mat& image, const QString& savePath)
         if (ui.chBox_monochromeObject->isChecked())
         {
             int color{ mainModel->getMainObjectColor(ui.spinBox_contrast->value()) };
-            cv::fillPoly(imageWithObjects, rectangels.back(), 0);
+            cv::fillPoly(maskObjects, rectangels.back(), color);
         }
         else
         {
@@ -76,23 +77,14 @@ void ImageGenerator::addObject(cv::Mat& image, const QString& savePath)
             mainObjectParamert->imageHeigth = boundingRect.height;
             cv::Mat object{};
             mainModel->generateImage(object);
-            
-            cv::Mat maskOlect(image.size(), CV_8UC1, cv::Scalar(255));
-            object.copyTo(maskOlect(boundingRect));
-
-            
-            
-            cv::bitwise_and(maskOlect, maskForObject, maskOlect);
-            
+            object.copyTo(maskObjects(boundingRect));
         }
-
     }
     
-    
-            cv::bitwise_not(maskForObject, maskForObject);
-            cv::bitwise_and(image, maskForObject, image);
-            cv::bitwise_or(image, maskOlect, image);
-            int a{4};
+    cv::bitwise_and(maskObjects, maskForObjects, maskObjects);
+    cv::bitwise_not(maskForObjects, maskForObjects);
+    cv::bitwise_and(image, maskForObjects, image);
+    cv::bitwise_or(image, maskObjects, image);
     mainModel->setParametrs(mainBackgroundParamert);
 }
 
