@@ -2,6 +2,8 @@
 
 #include <QtWidgets/QWidget>
 #include <qpixmap.h>
+#include <qfile.h>
+#include <qtextstream.h>
 #include <qfiledialog.h>
 #include <qdir.h>
 #include "ui_ImageGenerator.h"

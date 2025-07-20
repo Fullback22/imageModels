@@ -41,6 +41,9 @@ void ImageGenerator::addObject(cv::Mat& image, const QString& savePath)
     cv::Mat maskForObjects{ image.size(), CV_8UC1, cv::Scalar(0) };
     cv::Mat maskObjects(image.size(), CV_8UC1, cv::Scalar(255));
     cv::Mat imageWithObjects{ image.size(), CV_8UC1, cv::Scalar(0) };
+    QFile file(savePath + ".txt");
+    file.open(QIODevice::WriteOnly | QIODevice::Truncate);
+    QTextStream fileOut{ &file };
     for (size_t i{}; i < ui.spinBox_quantityObjects->value(); ++i)
     {
         int rotateAngel{ 0 };
@@ -79,8 +82,16 @@ void ImageGenerator::addObject(cv::Mat& image, const QString& savePath)
             mainModel->generateImage(object);
             object.copyTo(maskObjects(boundingRect));
         }
+        float centerX{ static_cast<float>(drawRect.center.x) / image.size().width };
+        fileOut << QString::number(centerX) << "\t";
+        float centerY{ static_cast<float>(drawRect.center.y) / image.size().height };
+        fileOut << QString::number(centerY) << "\t";
+        float rectWidth{ static_cast<float>(boundingRect.width) / image.size().width };
+        fileOut << QString::number(rectWidth) << "\t";
+        float rectHeight{ static_cast<float>(boundingRect.height) / image.size().height };
+        fileOut << QString::number(rectHeight) << "\n";
     }
-    
+    file.close();
     cv::bitwise_and(maskObjects, maskForObjects, maskObjects);
     cv::bitwise_not(maskForObjects, maskForObjects);
     cv::bitwise_and(image, maskForObjects, image);
@@ -128,20 +139,21 @@ void ImageGenerator::slot_changeSavePath(const QString& str)
 
 void ImageGenerator::slot_startGenerate()
 {
+    setDisabled(true);
+    mainModel->computeParametrsForObject(mainObjectParamert, ui.spinBox_contrast->value());
     QDir dir{ savePath_ };
     QStringList files{ dir.entryList({ "*.png" }, QDir::Files) };
     int startNumber{ files.count() };
-    setDisabled(true);
-    mainModel->computeParametrsForObject(mainObjectParamert, ui.spinBox_contrast->value());
     for (size_t i{}; i < ui.spBox_quantityImage->value(); ++i)
     {
         cv::Mat image{};
         mainModel->generateImage(image);
-        addObject(image, savePath_);
-        showImage(image);
         size_t imageNumber{ startNumber + i };
-        QString saveName{ savePath_ + "img_" + QString::number(imageNumber) + ".png" };
+        QString saveName{ savePath_ + "img_" + QString::number(imageNumber) };
+        addObject(image, saveName);
+        saveName += ".png";
         cv::imwrite(saveName.toStdString(), image);
+        showImage(image);
     }
     setEnabled(true);
 }
