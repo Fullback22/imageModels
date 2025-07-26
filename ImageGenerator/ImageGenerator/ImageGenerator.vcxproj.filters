@@ -49,9 +49,6 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Models\Parametrs\GausModelParametrs.cpp">
-      <Filter>Models\Parametrs</Filter>
-    </ClCompile>
     <ClCompile Include="Models\UIBuilders\GausUiBilder.cpp">
       <Filter>Models\UiBuilders</Filter>
     </ClCompile>
@@ -60,6 +57,9 @@
     </ClCompile>
     <ClCompile Include="Models\UIBuilders\BaseModelParametrsUiBilder.cpp">
       <Filter>Models\UiBuilders</Filter>
+    </ClCompile>
+    <ClCompile Include="Models\Parametrs\MarkovModelParametrs.cpp">
+      <Filter>Models\Parametrs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -77,6 +77,9 @@
     </ClInclude>
     <ClInclude Include="Models\GausModel.h">
       <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\Parametrs\MarkovModelParametrs.h">
+      <Filter>Models\Parametrs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
