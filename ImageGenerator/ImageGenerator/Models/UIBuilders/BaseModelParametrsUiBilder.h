@@ -18,7 +18,7 @@ protected:
 public:
 	void creatUi(QVBoxLayout& targetLayout) override;
 	void toDefault() override;
-	void clear() override;
+	void clearForm() override;
 	void setModel(IModelParametrs* modelParametrs)override;
 
 protected slots:

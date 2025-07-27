@@ -61,6 +61,12 @@
     <ClCompile Include="Models\Parametrs\MarkovModelParametrs.cpp">
       <Filter>Models\Parametrs</Filter>
     </ClCompile>
+    <ClCompile Include="Models\UIBuilders\MarkovUiBilder.cpp">
+      <Filter>Models\UiBuilders</Filter>
+    </ClCompile>
+    <ClCompile Include="Models\UIBuilders\ProbabilitiesFieldWidget.cpp">
+      <Filter>Models\UiBuilders</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Models\IImageModel.h">
@@ -89,5 +95,16 @@
     <QtMoc Include="Models\UIBuilders\BaseModelParametrsUiBilder.h">
       <Filter>Models\UiBuilders</Filter>
     </QtMoc>
+    <QtMoc Include="Models\UIBuilders\MarkovUiBilder.h">
+      <Filter>Models\UiBuilders</Filter>
+    </QtMoc>
+    <QtMoc Include="Models\UIBuilders\ProbabilitiesFieldWidget.h">
+      <Filter>Models\UiBuilders</Filter>
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="Models\UIBuilders\ProbabilitiesFieldWidget.ui">
+      <Filter>Models\UiBuilders</Filter>
+    </QtUic>
   </ItemGroup>
 </Project>

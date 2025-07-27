@@ -162,14 +162,14 @@ void ImageGenerator::slot_changeModel(int i)
 {
     if (mainUiBilder != nullptr)
     {
-        mainUiBilder->clear();
+        mainUiBilder->clearForm();
     }
     mainUiBilder = bilders[i];
     mainBackgroundParamert = backgroundParametrs[i];
     mainObjectParamert = objectParametrs[i];
-    mainModel = models[i];
+    //mainModel = models[i];
     mainUiBilder->setModel(mainBackgroundParamert);
-    mainModel->setParametrs(mainBackgroundParamert);
+    //mainModel->setParametrs(mainBackgroundParamert);
     mainUiBilder->creatUi(*(ui.vertLayout_modelGrBox));
     mainUiBilder->toDefault();
 }

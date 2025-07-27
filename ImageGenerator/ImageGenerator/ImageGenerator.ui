@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>991</width>
+    <width>973</width>
     <height>627</height>
    </rect>
   </property>
@@ -16,12 +16,15 @@
   <layout class="QHBoxLayout" name="horizontalLayout_7" stretch="0,1">
    <item>
     <layout class="QVBoxLayout" name="verticalLayout_4">
+     <property name="sizeConstraint">
+      <enum>QLayout::SetDefaultConstraint</enum>
+     </property>
      <item>
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
         <widget class="QComboBox" name="cb_models">
          <property name="currentIndex">
-          <number>1</number>
+          <number>0</number>
          </property>
          <item>
           <property name="text">
@@ -30,7 +33,7 @@
          </item>
          <item>
           <property name="text">
-           <string>Новый элемент</string>
+           <string>Марковские поля</string>
           </property>
          </item>
         </widget>

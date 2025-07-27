@@ -106,14 +106,19 @@
     <ClCompile Include="Models\Parametrs\MarkovModelParametrs.cpp" />
     <ClCompile Include="Models\UIBuilders\BaseModelParametrsUiBilder.cpp" />
     <ClCompile Include="Models\UIBuilders\GausUiBilder.cpp" />
+    <ClCompile Include="Models\UIBuilders\MarkovUiBilder.cpp" />
+    <ClCompile Include="Models\UIBuilders\ProbabilitiesFieldWidget.cpp" />
     <QtRcc Include="ImageGenerator.qrc" />
     <QtUic Include="ImageGenerator.ui" />
     <QtMoc Include="ImageGenerator.h" />
     <ClCompile Include="ImageGenerator.cpp" />
     <ClCompile Include="main.cpp" />
+    <QtUic Include="Models\UIBuilders\ProbabilitiesFieldWidget.ui" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Models\GausModel.h" />
+    <QtMoc Include="Models\UIBuilders\ProbabilitiesFieldWidget.h" />
+    <QtMoc Include="Models\UIBuilders\MarkovUiBilder.h" />
     <QtMoc Include="Models\UIBuilders\BaseModelParametrsUiBilder.h" />
     <ClInclude Include="Models\Parametrs\MarkovModelParametrs.h" />
     <ClInclude Include="Models\UIBuilders\IModelParametrsUiBilder.h" />

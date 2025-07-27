@@ -2,7 +2,7 @@
 
 GausUiBilder::~GausUiBilder()
 {
-	clear();
+	clearForm();
 }
 
 void GausUiBilder::creatUi(QVBoxLayout& targetLayout)
@@ -42,11 +42,11 @@ void GausUiBilder::toDefault()
 	}
 }
 
-void GausUiBilder::clear()
+void GausUiBilder::clearForm()
 {
 	if (isInit_)
 	{
-		BaseModelParametrsUiBilder::clear();
+		BaseModelParametrsUiBilder::clearForm();
 		label_medium->hide();
 		spBox_medium->hide();
 		horLayout_medium->removeWidget(label_medium);

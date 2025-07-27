@@ -35,7 +35,7 @@ void BaseModelParametrsUiBilder::toDefault()
 	}
 }
 
-void BaseModelParametrsUiBilder::clear()
+void BaseModelParametrsUiBilder::clearForm()
 {
 	if (isInit_)
 	{

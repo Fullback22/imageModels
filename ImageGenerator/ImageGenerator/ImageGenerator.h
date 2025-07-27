@@ -10,6 +10,7 @@
 
 #include "Models/GausModel.h"
 #include "Models/UIBuilders/GausUiBilder.h"
+#include "Models/UIBuilders/MarkovUiBilder.h"
 
 
 class ImageGenerator : public QWidget
@@ -20,9 +21,9 @@ class ImageGenerator : public QWidget
     bool generationInProgress_{ false };
 
     QVector<IImageModel*> models{ new GausModel() };
-    QVector<IModelParametrsUiBilder*> bilders{ new GausUiBilder() };
-    QVector<IModelParametrs*> backgroundParametrs{ new GausModelParametrs() };
-    QVector<IModelParametrs*> objectParametrs{ new GausModelParametrs() };
+    QVector<IModelParametrsUiBilder*> bilders{  new GausUiBilder(), new MarkovUiBilder() };
+    QVector<IModelParametrs*> backgroundParametrs{ new GausModelParametrs(), new MarkovModelParametrs() };
+    QVector<IModelParametrs*> objectParametrs{ new GausModelParametrs(), new MarkovModelParametrs() };
     IModelParametrsUiBilder* mainUiBilder{};
     IImageModel* mainModel{};
     IModelParametrs* mainBackgroundParamert{};
