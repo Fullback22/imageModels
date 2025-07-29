@@ -33,7 +33,7 @@ void MarkovUiBilder::creatUi(QVBoxLayout& targetLayout)
 	horLayout_quantityColors->addWidget(spBox_quantityColors);
 
 	field = new ProbabilitiesFieldWidget();
-	field->resize(10);
+	//field->resize(10);
 	field->resize(5);
 	targetLayout.addWidget(field);
 
@@ -45,6 +45,7 @@ void MarkovUiBilder::creatUi(QVBoxLayout& targetLayout)
 	isInit_ = true;
 	connect(spBox_medium, qOverload<int>(&QSpinBox::valueChanged), this, &MarkovUiBilder::slot_updateMedium);
 	connect(spBox_step, qOverload<int>(&QSpinBox::valueChanged), this, &MarkovUiBilder::slot_updateStep);
+	connect(spBox_quantityColors, qOverload<int>(&QSpinBox::valueChanged), this, &MarkovUiBilder::slot_updateQuantityColors);
 }
 
 void MarkovUiBilder::toDefault()
@@ -106,6 +107,7 @@ void MarkovUiBilder::slot_updateStep(int newValue)
 
 void MarkovUiBilder::slot_updateQuantityColors(int newValue)
 {
+	field->resize(newValue);
 }
 
 void MarkovUiBilder::slot_updateMedium(int newValue)

@@ -20,6 +20,7 @@ public:
 	void toDefault() override;
 	void clearForm() override;
 	void setModel(IModelParametrs* modelParametrs)override;
+	bool parametrsIsCorrect() const override { return true; };
 
 protected slots:
 	void slot_updateWidth(int newValue);

@@ -11,5 +11,6 @@ public:
 	virtual void toDefault() = 0;
 	virtual void clearForm() = 0;
 	virtual void setModel(IModelParametrs* modelParametrs) = 0;
+	virtual bool parametrsIsCorrect() const = 0;
 };
 

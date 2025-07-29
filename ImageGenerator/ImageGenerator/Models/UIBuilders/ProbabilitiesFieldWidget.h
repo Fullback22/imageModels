@@ -16,6 +16,7 @@ public:
 	ProbabilitiesFieldWidget(QWidget *parent = nullptr);
 	~ProbabilitiesFieldWidget();
 	void resize(size_t const newSize);
+	bool fieldIsCorrect() const;
 private:
 	Ui::ProbabilitiesFieldWidgetClass ui;
 

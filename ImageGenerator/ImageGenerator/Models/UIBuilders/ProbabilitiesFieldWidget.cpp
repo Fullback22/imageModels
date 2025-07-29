@@ -13,7 +13,8 @@ ProbabilitiesFieldWidget::ProbabilitiesFieldWidget(QWidget *parent)
 }
 
 ProbabilitiesFieldWidget::~ProbabilitiesFieldWidget()
-{}
+{
+}
 
 void ProbabilitiesFieldWidget::resize(size_t const newSize)
 {
@@ -34,6 +35,7 @@ void ProbabilitiesFieldWidget::resize(size_t const newSize)
 			gridLayout->addWidget(labelsRowsPosition[i], 0, i + 1);
 			gridLayout->addWidget(labelsColsPosition[i], i + 1, 0);
 			
+			le_field[i].resize(newSize);
 			for (size_t j{ }; j < fieldSize; ++j)
 			{
 				addLineEdit(j, i);
@@ -81,6 +83,13 @@ void ProbabilitiesFieldWidget::resize(size_t const newSize)
 		le_field.resize(newSize);
 	}
 	fieldSize = newSize;
+}
+
+bool ProbabilitiesFieldWidget::fieldIsCorrect() const
+{
+	if (quantityIncorectLe == 0)
+		return true;
+	return false;
 }
 
 void ProbabilitiesFieldWidget::addLineEdit(size_t const x, size_t const y)
