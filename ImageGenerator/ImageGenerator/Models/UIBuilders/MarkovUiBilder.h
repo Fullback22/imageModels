@@ -22,6 +22,7 @@ public:
 	void toDefault() override;
 	void clearForm() override;
 	void setModel(IModelParametrs* modelParametrs) override;
+	bool parametrsIsCorrect()const override;
 
 protected slots:
 	void slot_updateMedium(int newValue);

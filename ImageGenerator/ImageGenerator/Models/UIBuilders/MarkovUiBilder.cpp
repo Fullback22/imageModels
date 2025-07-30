@@ -101,6 +101,13 @@ void MarkovUiBilder::setModel(IModelParametrs* modelParametrs)
 {
 }
 
+bool MarkovUiBilder::parametrsIsCorrect() const
+{
+	if(field->fieldIsCorrect())
+		return true;
+	return false;
+}
+
 void MarkovUiBilder::slot_updateStep(int newValue)
 {
 }

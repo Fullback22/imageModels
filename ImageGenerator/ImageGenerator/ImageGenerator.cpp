@@ -113,12 +113,20 @@ cv::Point ImageGenerator::getCenterXY(const cv::Size& imageSize, const cv::Size 
 
 void ImageGenerator::slot_regenerateImage()
 {
-    mainModel->computeParametrsForObject(mainObjectParamert, ui.spinBox_contrast->value());
-    cv::Mat image{};
-    
-    
-    mainModel->generateImage(image);
-    showImage(image);
+    if (mainUiBilder->parametrsIsCorrect())
+    {
+        mainModel->computeParametrsForObject(mainObjectParamert, ui.spinBox_contrast->value());
+        cv::Mat image{};
+
+        mainModel->generateImage(image);
+        showImage(image);
+    }
+    else
+    {
+    QString err{ "”казаны некорректные параметры модели!" };
+    QMessageBox::StandardButton warrning{};
+    warrning = QMessageBox::warning(this, "Warning", QString::fromLocal8Bit("”казаны некорректные параметры модели!"), QMessageBox::Ok);
+    }
 }
 
 void ImageGenerator::slot_toDefualt()
@@ -139,23 +147,32 @@ void ImageGenerator::slot_changeSavePath(const QString& str)
 
 void ImageGenerator::slot_startGenerate()
 {
-    setDisabled(true);
-    mainModel->computeParametrsForObject(mainObjectParamert, ui.spinBox_contrast->value());
-    QDir dir{ savePath_ };
-    QStringList files{ dir.entryList({ "*.png" }, QDir::Files) };
-    int startNumber{ files.count() };
-    for (size_t i{}; i < ui.spBox_quantityImage->value(); ++i)
+    if (mainUiBilder->parametrsIsCorrect())
     {
-        cv::Mat image{};
-        mainModel->generateImage(image);
-        size_t imageNumber{ startNumber + i };
-        QString saveName{ savePath_ + "img_" + QString::number(imageNumber) };
-        addObject(image, saveName);
-        saveName += ".png";
-        cv::imwrite(saveName.toStdString(), image);
-        showImage(image);
+        setDisabled(true);
+        mainModel->computeParametrsForObject(mainObjectParamert, ui.spinBox_contrast->value());
+        QDir dir{ savePath_ };
+        QStringList files{ dir.entryList({ "*.png" }, QDir::Files) };
+        int startNumber{ files.count() };
+        for (size_t i{}; i < ui.spBox_quantityImage->value(); ++i)
+        {
+            cv::Mat image{};
+            mainModel->generateImage(image);
+            size_t imageNumber{ startNumber + i };
+            QString saveName{ savePath_ + "img_" + QString::number(imageNumber) };
+            addObject(image, saveName);
+            saveName += ".png";
+            cv::imwrite(saveName.toStdString(), image);
+            showImage(image);
+        }
+        setEnabled(true);
     }
-    setEnabled(true);
+    else
+    {
+        QString err{ "”казаны некорректные параметры модели!"};
+        QMessageBox::StandardButton warrning{};
+        warrning = QMessageBox::warning(this, "Warning", QString::fromLocal8Bit("”казаны некорректные параметры модели!"), QMessageBox::Ok);
+    }
 }
 
 void ImageGenerator::slot_changeModel(int i)

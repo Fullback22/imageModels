@@ -7,6 +7,7 @@
 #include <qfiledialog.h>
 #include <qdir.h>
 #include "ui_ImageGenerator.h"
+#include <qmessagebox.h>
 
 #include "Models/GausModel.h"
 #include "Models/UIBuilders/GausUiBilder.h"
