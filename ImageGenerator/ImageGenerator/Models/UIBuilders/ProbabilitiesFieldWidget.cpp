@@ -5,11 +5,24 @@ ProbabilitiesFieldWidget::ProbabilitiesFieldWidget(QWidget *parent)
 {
 	ui.setupUi(this);
 
-	gridLayout = new QGridLayout();
 	contentWidget = new QWidget();
-	contentWidget->setLayout(gridLayout);
-	setWidgetResizable(true);
+	mainLayout = new QVBoxLayout();
+	contentWidget->setLayout(mainLayout);
 	setWidget(contentWidget);
+
+	gridLayout = new QGridLayout();
+	mainLayout->addLayout(gridLayout);
+
+	buttonLayout = new QHBoxLayout();
+	mainLayout->addLayout(buttonLayout);
+
+	pb_random = new QPushButton(QString::fromLocal8Bit("Случайно"), this);
+	pb_random->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+	buttonLayout->addWidget(pb_random);
+	
+
+	setWidgetResizable(true);
+	connect(pb_random, &QPushButton::clicked, this, &ProbabilitiesFieldWidget::slot_randomGenerate);
 }
 
 ProbabilitiesFieldWidget::~ProbabilitiesFieldWidget()
@@ -18,6 +31,7 @@ ProbabilitiesFieldWidget::~ProbabilitiesFieldWidget()
 
 void ProbabilitiesFieldWidget::resize(size_t const newSize)
 {
+	
 	if (newSize > fieldSize)
 	{
 		le_field.resize(newSize);
@@ -83,6 +97,7 @@ void ProbabilitiesFieldWidget::resize(size_t const newSize)
 		le_field.resize(newSize);
 	}
 	fieldSize = newSize;
+
 }
 
 bool ProbabilitiesFieldWidget::fieldIsCorrect() const
@@ -90,6 +105,20 @@ bool ProbabilitiesFieldWidget::fieldIsCorrect() const
 	if (quantityIncorectLe == 0)
 		return true;
 	return false;
+}
+
+void ProbabilitiesFieldWidget::randomInit()
+{
+	std::random_device rd{};
+	std::mt19937 generator{ rd() };
+	std::uniform_int_distribution<int> fieldDis{ 0,100 };
+	for (size_t i{}; i < fieldSize; ++i)
+	{
+		for (size_t j{}; j < fieldSize; ++j)
+		{
+			le_field[i][j]->setText(QString::number(fieldDis(generator)));
+		}
+	}
 }
 
 void ProbabilitiesFieldWidget::addLineEdit(size_t const x, size_t const y)
@@ -101,7 +130,7 @@ void ProbabilitiesFieldWidget::addLineEdit(size_t const x, size_t const y)
 	connect(le_field[y][x], &QLineEdit::textChanged, [=]() {
 		bool ok{};
 		int value{ le_field[y][x]->text().toInt(&ok) };
-		if (ok && (value <= 0 || value > 100))
+		if (ok && (value < 0 || value > 100))
 		{
 			if (le_field[y][x]->styleSheet() == "")
 			{
@@ -122,5 +151,10 @@ void ProbabilitiesFieldWidget::addLineEdit(size_t const x, size_t const y)
 		}
 		});
 	gridLayout->addWidget(le_field[y][x], y + 1, x + 1);
+}
+
+void ProbabilitiesFieldWidget::slot_randomGenerate()
+{
+	randomInit();
 }
 

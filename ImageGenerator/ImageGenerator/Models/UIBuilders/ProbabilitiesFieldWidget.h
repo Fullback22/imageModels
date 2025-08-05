@@ -2,9 +2,12 @@
 
 #include <QScrollArea>
 #include <qgridlayout.h>
+#include <qgridlayout.h>
 #include <qlineedit.h>
 #include <qlabel.h>
 #include <qvalidator.h>
+#include <qpushbutton.h>
+#include <random>
 #include "ui_ProbabilitiesFieldWidget.h"
 
 class ProbabilitiesFieldWidget : public QScrollArea
@@ -17,21 +20,26 @@ public:
 	~ProbabilitiesFieldWidget();
 	void resize(size_t const newSize);
 	bool fieldIsCorrect() const;
+	void randomInit();
 private:
 	Ui::ProbabilitiesFieldWidgetClass ui;
 
 	QGridLayout* gridLayout{};
+	QVBoxLayout* mainLayout{};
+	QHBoxLayout* buttonLayout{};
 	QWidget* contentWidget{};
+	QPushButton* pb_random{};
 	QVector<QVector<QLineEdit*>> le_field{};
 	QVector<QLabel*> labelsRowsPosition{};
 	QVector<QLabel*> labelsColsPosition{};
 	size_t fieldSize{};
-	QIntValidator validator{ 1, 100 };
+	QIntValidator validator{ 0, 100 };
 	size_t quantityIncorectLe{};
 
 	void addLineEdit(size_t const x, size_t const y);
 	
 private slots:
+	void slot_randomGenerate();
 	
 signals:
 	void fieldChanged();
