@@ -17,6 +17,12 @@
 
 class ImageGenerator : public QWidget
 {
+    enum class Models
+    {
+        Gaus = 0,
+        Markov = 1,
+        MaxValue = 2
+    };
     Q_OBJECT
 
     QString savePath_{};
@@ -39,8 +45,10 @@ private:
     Ui::ImageGeneratorClass ui;
 
     void showImage(const cv::Mat& image);
-    void addObject(cv::Mat& image, const QString& savePath);
+    void addObjects(cv::Mat& image, const QString& savePath);
+    void addObjects(cv::Mat& image);
     cv::Point getCenterXY(const cv::Size& imageSize, const cv::Size boundingSize);
+    void setModel(Models model);
 private slots:
     void slot_changeModel(int i);
     void slot_regenerateImage();
