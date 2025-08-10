@@ -10,6 +10,7 @@
 #include <qmessagebox.h>
 
 #include "Models/GausModel.h"
+#include "Models/MarkovModel.h"
 #include "Models/UIBuilders/GausUiBilder.h"
 #include "Models/UIBuilders/MarkovUiBilder.h"
 
@@ -21,7 +22,7 @@ class ImageGenerator : public QWidget
     QString savePath_{};
     bool generationInProgress_{ false };
 
-    QVector<IImageModel*> models{ new GausModel() };
+    QVector<IImageModel*> models{ new GausModel(), new MarkovModel() };
     QVector<IModelParametrsUiBilder*> bilders{  new GausUiBilder(), new MarkovUiBilder() };
     QVector<IModelParametrs*> backgroundParametrs{ new GausModelParametrs(), new MarkovModelParametrs() };
     QVector<IModelParametrs*> objectParametrs{ new GausModelParametrs(), new MarkovModelParametrs() };

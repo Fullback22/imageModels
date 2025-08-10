@@ -67,6 +67,9 @@
     <ClCompile Include="Models\UIBuilders\ProbabilitiesFieldWidget.cpp">
       <Filter>Models\UiBuilders</Filter>
     </ClCompile>
+    <ClCompile Include="Models\MarkovModel.cpp">
+      <Filter>Models</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Models\IImageModel.h">
@@ -86,6 +89,9 @@
     </ClInclude>
     <ClInclude Include="Models\Parametrs\MarkovModelParametrs.h">
       <Filter>Models\Parametrs</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\MarkovModel.h">
+      <Filter>Models</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

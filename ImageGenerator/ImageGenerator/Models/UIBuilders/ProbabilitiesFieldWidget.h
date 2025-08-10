@@ -21,6 +21,8 @@ public:
 	void resize(size_t const newSize);
 	bool fieldIsCorrect() const;
 	void randomInit();
+	void oneInit();
+	void getField(std::vector<std::vector<unsigned int>>& outField);
 private:
 	Ui::ProbabilitiesFieldWidgetClass ui;
 
@@ -42,5 +44,5 @@ private slots:
 	void slot_randomGenerate();
 	
 signals:
-	void fieldChanged();
+	void fieldValuesChanged();
 };

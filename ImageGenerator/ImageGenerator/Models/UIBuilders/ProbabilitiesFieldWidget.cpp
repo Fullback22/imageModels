@@ -97,7 +97,6 @@ void ProbabilitiesFieldWidget::resize(size_t const newSize)
 		le_field.resize(newSize);
 	}
 	fieldSize = newSize;
-
 }
 
 bool ProbabilitiesFieldWidget::fieldIsCorrect() const
@@ -121,6 +120,31 @@ void ProbabilitiesFieldWidget::randomInit()
 	}
 }
 
+void ProbabilitiesFieldWidget::oneInit()
+{
+	for (size_t i{}; i < fieldSize; ++i)
+	{
+		for (size_t j{}; j < fieldSize; ++j)
+		{
+			le_field[i][j]->setText(QString::number(1));
+		}
+	}
+}
+
+void ProbabilitiesFieldWidget::getField(std::vector<std::vector<unsigned int>>& outField)
+{
+	outField.resize(fieldSize);
+	for (size_t i{}; i < fieldSize; ++i)
+	{
+		outField[i].resize(fieldSize);
+		for (size_t j{}; j < fieldSize; ++j)
+		{
+			outField[i][j] = static_cast<unsigned int>(le_field[i][j]->text().toInt());
+			unsigned int d = static_cast<unsigned int>(le_field[i][j]->text().toInt());
+		}
+	}
+}
+
 void ProbabilitiesFieldWidget::addLineEdit(size_t const x, size_t const y)
 {
 	le_field[y][x] = new QLineEdit(this);
@@ -135,7 +159,6 @@ void ProbabilitiesFieldWidget::addLineEdit(size_t const x, size_t const y)
 			if (le_field[y][x]->styleSheet() == "")
 			{
 				++quantityIncorectLe;
-				emit fieldChanged();
 			}
 			le_field[y][x]->setText("");
 			le_field[y][x]->setStyleSheet("border: 2px solid red;");
@@ -145,9 +168,9 @@ void ProbabilitiesFieldWidget::addLineEdit(size_t const x, size_t const y)
 			if (le_field[y][x]->styleSheet() != "")
 			{
 				--quantityIncorectLe;
-				emit fieldChanged();
 			}
 			le_field[y][x]->setStyleSheet("");
+			emit fieldValuesChanged();
 		}
 		});
 	gridLayout->addWidget(le_field[y][x], y + 1, x + 1);

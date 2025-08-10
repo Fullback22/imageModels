@@ -33,23 +33,33 @@ void MarkovUiBilder::creatUi(QVBoxLayout& targetLayout)
 	horLayout_quantityColors->addWidget(spBox_quantityColors);
 
 	field = new ProbabilitiesFieldWidget();
-	//field->resize(10);
-	field->resize(5);
 	targetLayout.addWidget(field);
 
 
 	spBox_medium->setMaximum(255);
 	spBox_step->setMaximum(25);
 	spBox_quantityColors->setMaximum(255);
+	spBox_quantityColors->setMinimum(1);
 
 	isInit_ = true;
 	connect(spBox_medium, qOverload<int>(&QSpinBox::valueChanged), this, &MarkovUiBilder::slot_updateMedium);
 	connect(spBox_step, qOverload<int>(&QSpinBox::valueChanged), this, &MarkovUiBilder::slot_updateStep);
 	connect(spBox_quantityColors, qOverload<int>(&QSpinBox::valueChanged), this, &MarkovUiBilder::slot_updateQuantityColors);
+	connect(field, &ProbabilitiesFieldWidget::fieldValuesChanged, this, &MarkovUiBilder::slot_updateConditionalTransitions);
+
+	toDefault();
 }
 
 void MarkovUiBilder::toDefault()
 {
+	if (isInit_)
+	{
+		BaseModelParametrsUiBilder::toDefault();
+		spBox_medium->setValue(100);
+		spBox_step->setValue(5);
+		spBox_quantityColors->setValue(5);
+		field->oneInit();
+	}
 }
 
 void MarkovUiBilder::clearForm()
@@ -99,6 +109,8 @@ void MarkovUiBilder::clearForm()
 
 void MarkovUiBilder::setModel(IModelParametrs* modelParametrs)
 {
+	BaseModelParametrsUiBilder::modelParametrs_ = modelParametrs;
+	modelParametrs_ = dynamic_cast<MarkovModelParametrs*>(modelParametrs);
 }
 
 bool MarkovUiBilder::parametrsIsCorrect() const
@@ -110,14 +122,29 @@ bool MarkovUiBilder::parametrsIsCorrect() const
 
 void MarkovUiBilder::slot_updateStep(int newValue)
 {
+	modelParametrs_->step = newValue;
 }
 
 void MarkovUiBilder::slot_updateQuantityColors(int newValue)
 {
-	field->resize(newValue);
+	fieldIsResize = true;
+	if (newValue >= 1)
+	{
+		field->resize(newValue);
+		modelParametrs_->quantityColors = newValue;
+	}
+	fieldIsResize = false;
+	field->getField(modelParametrs_->conditionalTransitions);
+}
+
+void MarkovUiBilder::slot_updateConditionalTransitions()
+{
+	if (!fieldIsResize)
+		field->getField(modelParametrs_->conditionalTransitions);
 }
 
 void MarkovUiBilder::slot_updateMedium(int newValue)
 {
+	modelParametrs_->medium = newValue;
 }
 

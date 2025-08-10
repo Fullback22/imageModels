@@ -6,9 +6,9 @@ class MarkovModelParametrs :
     public IModelParametrs
 {
 public:
-    int medium{};
-    int step{};
-    int quantityColors{};
-    std::vector<std::vector<int>> conditionalTransitions;
+    unsigned int medium{};
+    unsigned int step{};
+    unsigned int quantityColors{};
+    std::vector<std::vector<unsigned int>> conditionalTransitions;
 };
 
