@@ -103,10 +103,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Models\GausModel.cpp" />
+    <ClCompile Include="Models\GibsModel.cpp" />
     <ClCompile Include="Models\MarkovModel.cpp" />
-    <ClCompile Include="Models\Parametrs\MarkovModelParametrs.cpp" />
     <ClCompile Include="Models\UIBuilders\BaseModelParametrsUiBilder.cpp" />
     <ClCompile Include="Models\UIBuilders\GausUiBilder.cpp" />
+    <ClCompile Include="Models\UIBuilders\GibsUiBilder.cpp" />
     <ClCompile Include="Models\UIBuilders\MarkovUiBilder.cpp" />
     <ClCompile Include="Models\UIBuilders\ProbabilitiesFieldWidget.cpp" />
     <QtRcc Include="ImageGenerator.qrc" />
@@ -121,8 +122,11 @@
     <QtMoc Include="Models\UIBuilders\ProbabilitiesFieldWidget.h" />
     <QtMoc Include="Models\UIBuilders\MarkovUiBilder.h" />
     <QtMoc Include="Models\UIBuilders\BaseModelParametrsUiBilder.h" />
+    <ClInclude Include="Models\GibsModel.h" />
     <ClInclude Include="Models\MarkovModel.h" />
+    <ClInclude Include="Models\Parametrs\GibsModelParametrs.h" />
     <ClInclude Include="Models\Parametrs\MarkovModelParametrs.h" />
+    <QtMoc Include="Models\UIBuilders\GibsUiBilder.h" />
     <ClInclude Include="Models\UIBuilders\IModelParametrsUiBilder.h" />
     <QtMoc Include="Models\UIBuilders\GausUiBilder.h" />
     <ClInclude Include="Models\IImageModel.h" />

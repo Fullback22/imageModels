@@ -58,9 +58,6 @@
     <ClCompile Include="Models\UIBuilders\BaseModelParametrsUiBilder.cpp">
       <Filter>Models\UiBuilders</Filter>
     </ClCompile>
-    <ClCompile Include="Models\Parametrs\MarkovModelParametrs.cpp">
-      <Filter>Models\Parametrs</Filter>
-    </ClCompile>
     <ClCompile Include="Models\UIBuilders\MarkovUiBilder.cpp">
       <Filter>Models\UiBuilders</Filter>
     </ClCompile>
@@ -69,6 +66,12 @@
     </ClCompile>
     <ClCompile Include="Models\MarkovModel.cpp">
       <Filter>Models</Filter>
+    </ClCompile>
+    <ClCompile Include="Models\GibsModel.cpp">
+      <Filter>Models</Filter>
+    </ClCompile>
+    <ClCompile Include="Models\UIBuilders\GibsUiBilder.cpp">
+      <Filter>Models\UiBuilders</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -93,6 +96,12 @@
     <ClInclude Include="Models\MarkovModel.h">
       <Filter>Models</Filter>
     </ClInclude>
+    <ClInclude Include="Models\GibsModel.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\Parametrs\GibsModelParametrs.h">
+      <Filter>Models\Parametrs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Models\UIBuilders\GausUiBilder.h">
@@ -105,6 +114,9 @@
       <Filter>Models\UiBuilders</Filter>
     </QtMoc>
     <QtMoc Include="Models\UIBuilders\ProbabilitiesFieldWidget.h">
+      <Filter>Models\UiBuilders</Filter>
+    </QtMoc>
+    <QtMoc Include="Models\UIBuilders\GibsUiBilder.h">
       <Filter>Models\UiBuilders</Filter>
     </QtMoc>
   </ItemGroup>

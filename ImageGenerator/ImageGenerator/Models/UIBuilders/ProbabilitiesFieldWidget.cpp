@@ -131,6 +131,23 @@ void ProbabilitiesFieldWidget::oneInit()
 	}
 }
 
+void ProbabilitiesFieldWidget::diagonalInit(int const diagonalValue)
+{
+	for (size_t i{}; i < fieldSize; ++i)
+	{
+		for (size_t j{}; j < fieldSize; ++j)
+		{
+			if (i == j)
+			{
+				le_field[i][j]->setText(QString::number(diagonalValue));
+			}
+			else {
+				le_field[i][j]->setText(QString::number(1));
+			}
+		}
+	}
+}
+
 void ProbabilitiesFieldWidget::getField(std::vector<std::vector<unsigned int>>& outField)
 {
 	outField.resize(fieldSize);

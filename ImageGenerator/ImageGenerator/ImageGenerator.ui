@@ -36,6 +36,11 @@
            <string>Марковские поля</string>
           </property>
          </item>
+         <item>
+          <property name="text">
+           <string>Модель Гибса</string>
+          </property>
+         </item>
         </widget>
        </item>
        <item>

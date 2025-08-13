@@ -11,8 +11,10 @@
 
 #include "Models/GausModel.h"
 #include "Models/MarkovModel.h"
+#include "Models/GibsModel.h"
 #include "Models/UIBuilders/GausUiBilder.h"
 #include "Models/UIBuilders/MarkovUiBilder.h"
+#include "Models/UIBuilders/GibsUiBilder.h"
 
 
 class ImageGenerator : public QWidget
@@ -21,17 +23,18 @@ class ImageGenerator : public QWidget
     {
         Gaus = 0,
         Markov = 1,
-        MaxValue = 2
+        Gibs = 2,
+        MaxValue = 3
     };
     Q_OBJECT
 
     QString savePath_{};
     bool generationInProgress_{ false };
 
-    QVector<IImageModel*> models{ new GausModel(), new MarkovModel() };
-    QVector<IModelParametrsUiBilder*> bilders{  new GausUiBilder(), new MarkovUiBilder() };
-    QVector<IModelParametrs*> backgroundParametrs{ new GausModelParametrs(), new MarkovModelParametrs() };
-    QVector<IModelParametrs*> objectParametrs{ new GausModelParametrs(), new MarkovModelParametrs() };
+    QVector<IImageModel*> models{ new GausModel(), new MarkovModel(), new GibsModel() };
+    QVector<IModelParametrsUiBilder*> bilders{  new GausUiBilder(), new MarkovUiBilder(), new GibsUiBilder() };
+    QVector<IModelParametrs*> backgroundParametrs{ new GausModelParametrs(), new MarkovModelParametrs(), new GibsModelParametrs() };
+    QVector<IModelParametrs*> objectParametrs{ new GausModelParametrs(), new MarkovModelParametrs(), new GibsModelParametrs() };
     IModelParametrsUiBilder* mainUiBilder{};
     IImageModel* mainModel{};
     IModelParametrs* mainBackgroundParamert{};

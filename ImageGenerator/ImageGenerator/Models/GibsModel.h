@@ -1,18 +1,18 @@
 #pragma once
+#include "IImageModel.h"
+#include "Parametrs/GibsModelParametrs.h"
+
 #include <random>
 
-#include "IImageModel.h"
-#include "Parametrs/MarkovModelParametrs.h"
-
-class MarkovModel:
-	public IImageModel
+class GibsModel :
+    public IImageModel
 {
     std::random_device rd_{};
     std::mt19937 generator_{ rd_() };
 
-    unsigned int getNewValue(const std::vector<unsigned int>& frequncys);
+    //unsigned int getNewValue(const std::vector<unsigned int>& frequncys);
 
-    MarkovModelParametrs* param_{};
+    GibsModelParametrs* param_{};
 public:
     void generateImage(cv::Mat& inOutImage) override;
     void setParametrs(IModelParametrs* parametrs) override;

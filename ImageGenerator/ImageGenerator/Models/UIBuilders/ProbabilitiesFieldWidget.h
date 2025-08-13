@@ -22,6 +22,7 @@ public:
 	bool fieldIsCorrect() const;
 	void randomInit();
 	void oneInit();
+	void diagonalInit(int const diagonalValue);
 	void getField(std::vector<std::vector<unsigned int>>& outField);
 private:
 	Ui::ProbabilitiesFieldWidgetClass ui;
