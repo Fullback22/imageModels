@@ -6,6 +6,7 @@ void GibsModel::generateImage(cv::Mat& inOutImage)
 
 void GibsModel::setParametrs(IModelParametrs* parametrs)
 {
+    param_ = dynamic_cast<GibsModelParametrs*>(parametrs);
 }
 
 void GibsModel::computeParametrsForObject(IModelParametrs* parametrs, float contrast)

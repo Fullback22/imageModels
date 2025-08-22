@@ -13,9 +13,9 @@ class GibsUiBilder:
 	bool isInit_{ false };
 	bool fieldIsResize{ false };
 	Q_OBJECT
-	//QLabel* label_medium{}, * label_step{}, * label_quantityColors{}, * label_probabilities{};
+	QLabel* label_medium{}, * label_step{}, * label_quantityColors{}, * label_probabilities{};
 	QSpinBox* spBox_medium{}, * spBox_step{}, * spBox_quantityColors{};
-	//QHBoxLayout* horLayout_medium{}, * horLayout_step{}, * horLayout_quantityColors{};
+	QHBoxLayout* horLayout_medium{}, * horLayout_step{}, * horLayout_quantityColors{};
 	ProbabilitiesFieldWidget* field{};
 
 public:

@@ -174,6 +174,7 @@ void ImageGenerator::setModel(Models model)
     if (mainUiBilder != nullptr)
     {
         mainUiBilder->clearForm();
+        mainUiBilder->hide();
     }
     size_t index{ static_cast<size_t>(model) };
     mainUiBilder = bilders[index];
