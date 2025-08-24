@@ -29,74 +29,26 @@ ProbabilitiesFieldWidget::~ProbabilitiesFieldWidget()
 {
 }
 
-void ProbabilitiesFieldWidget::resize(size_t const newSize)
+void ProbabilitiesFieldWidget::resize(const QSize& newSize)
 {
-	
-	if (newSize > fieldSize)
+	if (newSize.height() > fieldSize.height())
 	{
-		le_field.resize(newSize);
-		labelsColsPosition.resize(newSize);
-		labelsRowsPosition.resize(newSize);
-		for (size_t i{ fieldSize }; i < newSize; ++i)
-		{
-			labelsColsPosition[i] = new QLabel(QString::number(i + 1));
-			labelsColsPosition[i]->setAlignment(Qt::AlignCenter);
-			labelsColsPosition[i]->setMaximumWidth(30);
-			labelsRowsPosition[i] = new QLabel(QString::number(i + 1));
-			labelsRowsPosition[i]->setAlignment(Qt::AlignCenter);
-			labelsRowsPosition[i]->setMaximumWidth(30);
-
-			gridLayout->addWidget(labelsRowsPosition[i], 0, i + 1);
-			gridLayout->addWidget(labelsColsPosition[i], i + 1, 0);
-			
-			le_field[i].resize(newSize);
-			for (size_t j{ }; j < fieldSize; ++j)
-			{
-				addLineEdit(j, i);
-			}
-		}
-
-		for (size_t i{}; i < newSize; ++i)
-		{
-			le_field[i].resize(newSize);
-			for (size_t j{ fieldSize }; j < newSize; ++j)
-			{
-				addLineEdit(j, i);
-			}
-		}
+		addRows(newSize);
 	}
-	else if (newSize < fieldSize)
+	else if (newSize.height() < fieldSize.height())
 	{
-		for (size_t i{ 0 }; i < newSize; ++i)
-		{
-			for (size_t j{ newSize}; j < fieldSize; ++j)
-			{
-				le_field[i][j]->hide();
-				delete le_field[i][j];
-				le_field[i][j] = nullptr;
-			}
-			le_field[i].resize(newSize);
-		}
-		for (size_t i{ newSize }; i < fieldSize; ++i)
-		{
-			labelsColsPosition[i]->hide();
-			delete labelsColsPosition[i];
-			labelsColsPosition[i]=nullptr;
-
-			labelsRowsPosition[i]->hide();
-			delete labelsRowsPosition[i];
-			labelsRowsPosition[i] = nullptr;
-
-			for (size_t j{ 0 }; j < fieldSize; ++j)
-			{
-				le_field[i][j]->hide();
-				delete le_field[i][j];
-				le_field[i][j] = nullptr;
-			}
-		}
-		le_field.resize(newSize);
+		removeRows(newSize);
 	}
-	fieldSize = newSize;
+	fieldSize.setHeight(newSize.height());
+	if (newSize.width() > fieldSize.width())
+	{
+		addCols(newSize.width());
+	}
+	else if (newSize.width() < fieldSize.width())
+	{
+		removeCols(newSize.width());
+	}
+	fieldSize.setWidth(newSize.width());
 }
 
 bool ProbabilitiesFieldWidget::fieldIsCorrect() const
@@ -111,9 +63,9 @@ void ProbabilitiesFieldWidget::randomInit()
 	std::random_device rd{};
 	std::mt19937 generator{ rd() };
 	std::uniform_int_distribution<int> fieldDis{ 0,100 };
-	for (size_t i{}; i < fieldSize; ++i)
+	for (size_t i{}; i < fieldSize.height(); ++i)
 	{
-		for (size_t j{}; j < fieldSize; ++j)
+		for (size_t j{}; j < fieldSize.width(); ++j)
 		{
 			le_field[i][j]->setText(QString::number(fieldDis(generator)));
 		}
@@ -122,9 +74,9 @@ void ProbabilitiesFieldWidget::randomInit()
 
 void ProbabilitiesFieldWidget::oneInit()
 {
-	for (size_t i{}; i < fieldSize; ++i)
+	for (size_t i{}; i < fieldSize.height(); ++i)
 	{
-		for (size_t j{}; j < fieldSize; ++j)
+		for (size_t j{}; j < fieldSize.width(); ++j)
 		{
 			le_field[i][j]->setText(QString::number(1));
 		}
@@ -133,9 +85,9 @@ void ProbabilitiesFieldWidget::oneInit()
 
 void ProbabilitiesFieldWidget::diagonalInit(int const diagonalValue)
 {
-	for (size_t i{}; i < fieldSize; ++i)
+	for (size_t i{}; i < fieldSize.height(); ++i)
 	{
-		for (size_t j{}; j < fieldSize; ++j)
+		for (size_t j{}; j < fieldSize.width(); ++j)
 		{
 			if (i == j)
 			{
@@ -150,11 +102,11 @@ void ProbabilitiesFieldWidget::diagonalInit(int const diagonalValue)
 
 void ProbabilitiesFieldWidget::getField(std::vector<std::vector<unsigned int>>& outField)
 {
-	outField.resize(fieldSize);
-	for (size_t i{}; i < fieldSize; ++i)
+	outField.resize(fieldSize.height());
+	for (size_t i{}; i < fieldSize.height(); ++i)
 	{
-		outField[i].resize(fieldSize);
-		for (size_t j{}; j < fieldSize; ++j)
+		outField[i].resize(fieldSize.width());
+		for (size_t j{}; j < fieldSize.width(); ++j)
 		{
 			outField[i][j] = static_cast<unsigned int>(le_field[i][j]->text().toInt());
 			unsigned int d = static_cast<unsigned int>(le_field[i][j]->text().toInt());
@@ -191,6 +143,92 @@ void ProbabilitiesFieldWidget::addLineEdit(size_t const x, size_t const y)
 		}
 		});
 	gridLayout->addWidget(le_field[y][x], y + 1, x + 1);
+}
+
+void ProbabilitiesFieldWidget::addCols(size_t const newCols)
+{
+	labelsColsPosition.resize(newCols);
+	for (size_t i{ fieldSize.width() }; i < newCols; ++i)
+	{
+		labelsColsPosition[i] = new QLabel(QString::number(i + 1));
+		labelsColsPosition[i]->setAlignment(Qt::AlignCenter);
+		labelsColsPosition[i]->setMaximumWidth(30);
+
+		gridLayout->addWidget(labelsColsPosition[i], i + 1, 0);
+	}
+
+	for (size_t i{}; i < fieldSize.height(); ++i)
+	{
+		le_field[i].resize(newCols);
+		for (size_t j{ fieldSize.width() }; j < newCols; ++j)
+		{
+			addLineEdit(j, i);
+		}
+	}
+}
+
+void ProbabilitiesFieldWidget::removeCols(size_t const newCols)
+{
+	for (size_t i{ 0 }; i < fieldSize.height(); ++i)
+	{
+		for (size_t j{ newCols }; j < fieldSize.width(); ++j)
+		{
+			le_field[i][j]->hide();
+			delete le_field[i][j];
+			le_field[i][j] = nullptr;
+		}
+		le_field[i].resize(newCols);
+	}
+
+	for (size_t i{ newCols }; i < fieldSize.width(); ++i)
+	{
+		labelsColsPosition[i]->hide();
+		delete labelsColsPosition[i];
+		labelsColsPosition[i] = nullptr;
+	}
+
+}
+
+void ProbabilitiesFieldWidget::addRows(const QSize& newSize)
+{
+	le_field.resize(newSize.height());
+	labelsRowsPosition.resize(newSize.height());
+	for (size_t i{ fieldSize.height() }; i < newSize.height(); ++i)
+	{
+		labelsRowsPosition[i] = new QLabel(QString::number(i + 1));
+		labelsRowsPosition[i]->setAlignment(Qt::AlignCenter);
+		labelsRowsPosition[i]->setMaximumWidth(30);
+
+		gridLayout->addWidget(labelsRowsPosition[i], 0, i + 1);
+
+		if (newSize.width() >= fieldSize.width())
+		{
+			le_field[i].resize(fieldSize.width());
+			for (size_t j{ }; j < fieldSize.width(); ++j)
+			{
+				addLineEdit(j, i);
+			}
+		}
+	}
+}
+
+void ProbabilitiesFieldWidget::removeRows(const QSize& newSize)
+{
+
+	for (size_t i{ newSize.height() }; i < fieldSize.height(); ++i)
+	{
+		labelsRowsPosition[i]->hide();
+		delete labelsRowsPosition[i];
+		labelsRowsPosition[i] = nullptr;
+
+		for (size_t j{}; j < fieldSize.width(); ++j)
+		{
+			le_field[i][j]->hide();
+			delete le_field[i][j];
+			le_field[i][j] = nullptr;
+		}
+	}
+	le_field.resize(newSize.height());
 }
 
 void ProbabilitiesFieldWidget::slot_randomGenerate()

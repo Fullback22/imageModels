@@ -18,7 +18,7 @@ class ProbabilitiesFieldWidget : public QScrollArea
 public:
 	ProbabilitiesFieldWidget(QWidget *parent = nullptr);
 	~ProbabilitiesFieldWidget();
-	void resize(size_t const newSize);
+	void resize(const QSize& newSize);
 	bool fieldIsCorrect() const;
 	void randomInit();
 	void oneInit();
@@ -35,11 +35,16 @@ private:
 	QVector<QVector<QLineEdit*>> le_field{};
 	QVector<QLabel*> labelsRowsPosition{};
 	QVector<QLabel*> labelsColsPosition{};
-	size_t fieldSize{};
+	QSize fieldSize{};
 	QIntValidator validator{ 0, 100 };
 	size_t quantityIncorectLe{};
 
 	void addLineEdit(size_t const x, size_t const y);
+
+	void addCols(size_t const newCols);
+	void removeCols(size_t const newCols);
+	void addRows(const QSize& newSize);
+	void removeRows(const QSize& newSize);
 	
 private slots:
 	void slot_randomGenerate();

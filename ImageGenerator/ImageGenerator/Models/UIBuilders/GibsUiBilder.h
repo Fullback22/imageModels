@@ -13,10 +13,10 @@ class GibsUiBilder:
 	bool isInit_{ false };
 	bool fieldIsResize{ false };
 	Q_OBJECT
-	QLabel* label_medium{}, * label_step{}, * label_quantityColors{}, * label_probabilities{};
-	QSpinBox* spBox_medium{}, * spBox_step{}, * spBox_quantityColors{};
-	QHBoxLayout* horLayout_medium{}, * horLayout_step{}, * horLayout_quantityColors{};
-	ProbabilitiesFieldWidget* field{};
+	QLabel* label_medium{}, * label_step{}, * label_quantityIteration{},* label_quantityColors{}, * label_probabilities{}, * label_startFrequencies{};
+	QSpinBox* spBox_medium{}, * spBox_step{}, * spBox_quantityColors{}, * spBox_quantityIteration{};
+	QHBoxLayout* horLayout_medium{}, * horLayout_step{}, * horLayout_quantityColors{}, * horLayout_quantityIteration{};
+	ProbabilitiesFieldWidget* field{}, *startFrequenciesField{};
 
 public:
 	~GibsUiBilder();
@@ -30,6 +30,7 @@ protected slots:
 	void slot_updateMedium(int newValue);
 	void slot_updateStep(int newValue);
 	void slot_updateQuantityColors(int newValue);
+	void slot_updateQuantityItterations(int newValue);
 	void slot_updateProbobilityMap();
 };
 

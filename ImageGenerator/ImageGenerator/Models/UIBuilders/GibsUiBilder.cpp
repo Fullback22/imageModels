@@ -24,6 +24,14 @@ void GibsUiBilder::creatUi(QVBoxLayout& targetLayout)
 	spBox_step = new QSpinBox();
 	horLayout_step->addWidget(spBox_step);
 
+	horLayout_quantityIteration = new QHBoxLayout();
+	targetLayout.addLayout(horLayout_quantityIteration);
+
+	label_quantityIteration = new QLabel(QString::fromLocal8Bit("Число иттераций"));
+	horLayout_quantityIteration->addWidget(label_quantityIteration);
+	spBox_quantityIteration = new QSpinBox();
+	horLayout_quantityIteration->addWidget(spBox_step);
+
 	horLayout_quantityColors = new QHBoxLayout();
 	targetLayout.addLayout(horLayout_quantityColors);
 
@@ -35,16 +43,21 @@ void GibsUiBilder::creatUi(QVBoxLayout& targetLayout)
 	field = new ProbabilitiesFieldWidget();
 	targetLayout.addWidget(field);
 
+	startFrequenciesField = new ProbabilitiesFieldWidget();
+	targetLayout.addWidget(startFrequenciesField);
 
 	spBox_medium->setMaximum(255);
 	spBox_step->setMaximum(25);
 	spBox_quantityColors->setMaximum(255);
 	spBox_quantityColors->setMinimum(1);
+	spBox_quantityIteration->setMaximum(1000);
+	spBox_quantityIteration->setMinimum(1);
 
 	isInit_ = true;
 	connect(spBox_medium, qOverload<int>(&QSpinBox::valueChanged), this, &GibsUiBilder::slot_updateMedium);
 	connect(spBox_step, qOverload<int>(&QSpinBox::valueChanged), this, &GibsUiBilder::slot_updateStep);
 	connect(spBox_quantityColors, qOverload<int>(&QSpinBox::valueChanged), this, &GibsUiBilder::slot_updateQuantityColors);
+	connect(spBox_quantityIteration, qOverload<int>(&QSpinBox::valueChanged), this, &GibsUiBilder::slot_updateQuantityColors);
 	connect(field, &ProbabilitiesFieldWidget::fieldValuesChanged, this, &GibsUiBilder::slot_updateProbobilityMap);
 
 	toDefault();
@@ -135,6 +148,11 @@ void GibsUiBilder::slot_updateQuantityColors(int newValue)
 	}
 	fieldIsResize = false;
 	field->getField(modelParametrs_->propabilityMap);
+}
+
+void GibsUiBilder::slot_updateQuantityItterations(int newValue)
+{
+	modelParametrs_->quaantityIteration = newValue;
 }
 
 void GibsUiBilder::slot_updateProbobilityMap()
