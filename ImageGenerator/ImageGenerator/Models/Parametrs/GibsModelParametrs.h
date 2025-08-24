@@ -10,5 +10,6 @@ public:
     unsigned int step{};
     unsigned int quantityColors{};
     std::vector<std::vector<unsigned int>> propabilityMap;
+    std::vector<int> startFrequencyClasses;
 };
 
