@@ -35,7 +35,7 @@ private:
 	QVector<QVector<QLineEdit*>> le_field{};
 	QVector<QLabel*> labelsRowsPosition{};
 	QVector<QLabel*> labelsColsPosition{};
-	QSize fieldSize{};
+	QSize fieldSize{0, 0};
 	QIntValidator validator{ 0, 100 };
 	size_t quantityIncorectLe{};
 

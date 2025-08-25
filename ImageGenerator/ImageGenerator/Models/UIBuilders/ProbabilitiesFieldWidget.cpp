@@ -148,7 +148,7 @@ void ProbabilitiesFieldWidget::addLineEdit(size_t const x, size_t const y)
 void ProbabilitiesFieldWidget::addCols(size_t const newCols)
 {
 	labelsColsPosition.resize(newCols);
-	for (size_t i{ fieldSize.width() }; i < newCols; ++i)
+	for (int i{ fieldSize.width() }; i < newCols; ++i)
 	{
 		labelsColsPosition[i] = new QLabel(QString::number(i + 1));
 		labelsColsPosition[i]->setAlignment(Qt::AlignCenter);
@@ -157,10 +157,10 @@ void ProbabilitiesFieldWidget::addCols(size_t const newCols)
 		gridLayout->addWidget(labelsColsPosition[i], i + 1, 0);
 	}
 
-	for (size_t i{}; i < fieldSize.height(); ++i)
+	for (int i{}; i < fieldSize.height(); ++i)
 	{
 		le_field[i].resize(newCols);
-		for (size_t j{ fieldSize.width() }; j < newCols; ++j)
+		for (int j{ fieldSize.width() }; j < newCols; ++j)
 		{
 			addLineEdit(j, i);
 		}
@@ -169,7 +169,7 @@ void ProbabilitiesFieldWidget::addCols(size_t const newCols)
 
 void ProbabilitiesFieldWidget::removeCols(size_t const newCols)
 {
-	for (size_t i{ 0 }; i < fieldSize.height(); ++i)
+	for (int i{ 0 }; i < fieldSize.height(); ++i)
 	{
 		for (size_t j{ newCols }; j < fieldSize.width(); ++j)
 		{
@@ -193,7 +193,7 @@ void ProbabilitiesFieldWidget::addRows(const QSize& newSize)
 {
 	le_field.resize(newSize.height());
 	labelsRowsPosition.resize(newSize.height());
-	for (size_t i{ fieldSize.height() }; i < newSize.height(); ++i)
+	for (int i{ fieldSize.height() }; i < newSize.height(); ++i)
 	{
 		labelsRowsPosition[i] = new QLabel(QString::number(i + 1));
 		labelsRowsPosition[i]->setAlignment(Qt::AlignCenter);
@@ -204,7 +204,7 @@ void ProbabilitiesFieldWidget::addRows(const QSize& newSize)
 		if (newSize.width() >= fieldSize.width())
 		{
 			le_field[i].resize(fieldSize.width());
-			for (size_t j{ }; j < fieldSize.width(); ++j)
+			for (int j{ }; j < fieldSize.width(); ++j)
 			{
 				addLineEdit(j, i);
 			}
@@ -215,13 +215,13 @@ void ProbabilitiesFieldWidget::addRows(const QSize& newSize)
 void ProbabilitiesFieldWidget::removeRows(const QSize& newSize)
 {
 
-	for (size_t i{ newSize.height() }; i < fieldSize.height(); ++i)
+	for (int i{ newSize.height() }; i < fieldSize.height(); ++i)
 	{
 		labelsRowsPosition[i]->hide();
 		delete labelsRowsPosition[i];
 		labelsRowsPosition[i] = nullptr;
 
-		for (size_t j{}; j < fieldSize.width(); ++j)
+		for (int j{}; j < fieldSize.width(); ++j)
 		{
 			le_field[i][j]->hide();
 			delete le_field[i][j];

@@ -143,7 +143,7 @@ void GibsUiBilder::slot_updateQuantityColors(int newValue)
 	fieldIsResize = true;
 	if (newValue >= 1)
 	{
-		field->resize(newValue);
+		field->resize(QSize{ newValue, newValue });
 		modelParametrs_->quantityColors = newValue;
 	}
 	fieldIsResize = false;
