@@ -154,7 +154,7 @@ void ProbabilitiesFieldWidget::addCols(size_t const newCols)
 		labelsColsPosition[i]->setAlignment(Qt::AlignCenter);
 		labelsColsPosition[i]->setMaximumWidth(30);
 
-		gridLayout->addWidget(labelsColsPosition[i], i + 1, 0);
+		gridLayout->addWidget(labelsColsPosition[i], 0, i + 1);
 	}
 
 	for (int i{}; i < fieldSize.height(); ++i)
@@ -199,7 +199,7 @@ void ProbabilitiesFieldWidget::addRows(const QSize& newSize)
 		labelsRowsPosition[i]->setAlignment(Qt::AlignCenter);
 		labelsRowsPosition[i]->setMaximumWidth(30);
 
-		gridLayout->addWidget(labelsRowsPosition[i], 0, i + 1);
+		gridLayout->addWidget(labelsRowsPosition[i], i + 1, 0);
 
 		if (newSize.width() >= fieldSize.width())
 		{

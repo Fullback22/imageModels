@@ -227,7 +227,6 @@ void GibsModel::generatePart9()
 void GibsModel::initMainImage()
 {
 	mainImage_ = cv::Mat::zeros(param_->imageHeigth, param_->imageWidth, CV_8UC1);
-	param_->startFrequencyClasses.resize(param_->quantityColors, 1);
 	std::discrete_distribution<int> initImageDist{ param_->startFrequencyClasses.begin(), param_->startFrequencyClasses.end() };
 	for (int i{ 0 }; i < param_->imageHeigth; ++i)
 	{

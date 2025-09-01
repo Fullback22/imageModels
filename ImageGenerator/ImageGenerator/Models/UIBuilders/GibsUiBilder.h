@@ -32,5 +32,6 @@ protected slots:
 	void slot_updateQuantityColors(int newValue);
 	void slot_updateQuantityItterations(int newValue);
 	void slot_updateProbobilityMap();
+	void slot_updateStartFrequencies();
 };
 

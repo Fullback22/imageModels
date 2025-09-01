@@ -30,7 +30,7 @@ void GibsUiBilder::creatUi(QVBoxLayout& targetLayout)
 	label_quantityIteration = new QLabel(QString::fromLocal8Bit("Число иттераций"));
 	horLayout_quantityIteration->addWidget(label_quantityIteration);
 	spBox_quantityIteration = new QSpinBox();
-	horLayout_quantityIteration->addWidget(spBox_step);
+	horLayout_quantityIteration->addWidget(spBox_quantityIteration);
 
 	horLayout_quantityColors = new QHBoxLayout();
 	targetLayout.addLayout(horLayout_quantityColors);
@@ -57,8 +57,9 @@ void GibsUiBilder::creatUi(QVBoxLayout& targetLayout)
 	connect(spBox_medium, qOverload<int>(&QSpinBox::valueChanged), this, &GibsUiBilder::slot_updateMedium);
 	connect(spBox_step, qOverload<int>(&QSpinBox::valueChanged), this, &GibsUiBilder::slot_updateStep);
 	connect(spBox_quantityColors, qOverload<int>(&QSpinBox::valueChanged), this, &GibsUiBilder::slot_updateQuantityColors);
-	connect(spBox_quantityIteration, qOverload<int>(&QSpinBox::valueChanged), this, &GibsUiBilder::slot_updateQuantityColors);
+	connect(spBox_quantityIteration, qOverload<int>(&QSpinBox::valueChanged), this, &GibsUiBilder::slot_updateQuantityItterations);
 	connect(field, &ProbabilitiesFieldWidget::fieldValuesChanged, this, &GibsUiBilder::slot_updateProbobilityMap);
+	connect(startFrequenciesField, &ProbabilitiesFieldWidget::fieldValuesChanged, this, &GibsUiBilder::slot_updateStartFrequencies);
 
 	toDefault();
 }
@@ -71,7 +72,9 @@ void GibsUiBilder::toDefault()
 		spBox_medium->setValue(100);
 		spBox_step->setValue(5);
 		spBox_quantityColors->setValue(5);
+		spBox_quantityIteration->setValue(100);
 		field->diagonalInit(5);
+		startFrequenciesField->oneInit();
 	}
 }
 
@@ -113,9 +116,25 @@ void GibsUiBilder::clearForm()
 		delete horLayout_quantityColors;
 		horLayout_quantityColors = nullptr;
 
+		label_quantityIteration->hide();
+		spBox_quantityIteration->hide();
+		horLayout_quantityIteration->removeWidget(label_quantityIteration);
+		horLayout_quantityIteration->removeWidget(spBox_quantityIteration);
+		delete label_quantityIteration;
+		label_quantityIteration = nullptr;
+		delete spBox_quantityIteration;
+		spBox_quantityIteration = nullptr;
+		delete horLayout_quantityIteration;
+		horLayout_quantityIteration = nullptr;
+
 		field->hide();
 		delete field;
 		field = nullptr;
+
+		startFrequenciesField->hide();
+		delete startFrequenciesField;
+		startFrequenciesField = nullptr;
+
 		isInit_ = false;
 	}
 }
@@ -144,10 +163,14 @@ void GibsUiBilder::slot_updateQuantityColors(int newValue)
 	if (newValue >= 1)
 	{
 		field->resize(QSize{ newValue, newValue });
+		startFrequenciesField->resize(QSize(newValue, 1));
 		modelParametrs_->quantityColors = newValue;
 	}
 	fieldIsResize = false;
 	field->getField(modelParametrs_->propabilityMap);
+	std::vector<std::vector<unsigned int>> bufer;
+	startFrequenciesField->getField(bufer);
+	modelParametrs_->startFrequencyClasses = bufer[0];
 }
 
 void GibsUiBilder::slot_updateQuantityItterations(int newValue)
@@ -159,6 +182,16 @@ void GibsUiBilder::slot_updateProbobilityMap()
 {
 	if (!fieldIsResize)
 		field->getField(modelParametrs_->propabilityMap);
+}
+
+void GibsUiBilder::slot_updateStartFrequencies()
+{
+	if (!fieldIsResize)
+	{
+		std::vector<std::vector<unsigned int>> bufer;
+		startFrequenciesField->getField(bufer);
+		modelParametrs_->startFrequencyClasses = bufer[0];
+	}
 }
 
 void GibsUiBilder::slot_updateMedium(int newValue)
