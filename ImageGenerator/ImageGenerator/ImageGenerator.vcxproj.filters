@@ -73,6 +73,15 @@
     <ClCompile Include="Models\UIBuilders\GibsUiBilder.cpp">
       <Filter>Models\UiBuilders</Filter>
     </ClCompile>
+    <ClCompile Include="Models\UIBuilders\WaveUiBuilder.cpp">
+      <Filter>Models\UiBuilders</Filter>
+    </ClCompile>
+    <ClCompile Include="Models\WaveModel.cpp">
+      <Filter>Models</Filter>
+    </ClCompile>
+    <ClCompile Include="Models\UIBuilders\UiModelParametr.cpp">
+      <Filter>Models\UiBuilders</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Models\IImageModel.h">
@@ -102,6 +111,12 @@
     <ClInclude Include="Models\Parametrs\GibsModelParametrs.h">
       <Filter>Models\Parametrs</Filter>
     </ClInclude>
+    <ClInclude Include="Models\Parametrs\WaveModelParametrs.h">
+      <Filter>Models\Parametrs</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\WaveModel.h">
+      <Filter>Models</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Models\UIBuilders\GausUiBilder.h">
@@ -117,6 +132,12 @@
       <Filter>Models\UiBuilders</Filter>
     </QtMoc>
     <QtMoc Include="Models\UIBuilders\GibsUiBilder.h">
+      <Filter>Models\UiBuilders</Filter>
+    </QtMoc>
+    <QtMoc Include="Models\UIBuilders\WaveUiBuilder.h">
+      <Filter>Models\UiBuilders</Filter>
+    </QtMoc>
+    <QtMoc Include="Models\UIBuilders\UiModelParametr.h">
       <Filter>Models\UiBuilders</Filter>
     </QtMoc>
   </ItemGroup>

@@ -13,14 +13,14 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{1AE94CC8-875D-4530-9889-08DEF7615089}</ProjectGuid>
     <Keyword>QtVS_v304</Keyword>
-    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">10.0.18362.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">10.0</WindowsTargetPlatformVersion>
     <WindowsTargetPlatformVersion Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">10.0</WindowsTargetPlatformVersion>
     <QtMsBuild Condition="'$(QtMsBuild)'=='' OR !Exists('$(QtMsBuild)\qt.targets')">$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -110,6 +110,9 @@
     <ClCompile Include="Models\UIBuilders\GibsUiBilder.cpp" />
     <ClCompile Include="Models\UIBuilders\MarkovUiBilder.cpp" />
     <ClCompile Include="Models\UIBuilders\ProbabilitiesFieldWidget.cpp" />
+    <ClCompile Include="Models\UIBuilders\UiModelParametr.cpp" />
+    <ClCompile Include="Models\UIBuilders\WaveUiBuilder.cpp" />
+    <ClCompile Include="Models\WaveModel.cpp" />
     <QtRcc Include="ImageGenerator.qrc" />
     <QtUic Include="ImageGenerator.ui" />
     <QtMoc Include="ImageGenerator.h" />
@@ -119,6 +122,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Models\GausModel.h" />
+    <QtMoc Include="Models\UIBuilders\UiModelParametr.h" />
+    <ClInclude Include="Models\WaveModel.h" />
+    <QtMoc Include="Models\UIBuilders\WaveUiBuilder.h" />
     <QtMoc Include="Models\UIBuilders\ProbabilitiesFieldWidget.h" />
     <QtMoc Include="Models\UIBuilders\MarkovUiBilder.h" />
     <QtMoc Include="Models\UIBuilders\BaseModelParametrsUiBilder.h" />
@@ -127,6 +133,7 @@
     <ClInclude Include="Models\Parametrs\GibsModelParametrs.h" />
     <ClInclude Include="Models\Parametrs\MarkovModelParametrs.h" />
     <QtMoc Include="Models\UIBuilders\GibsUiBilder.h" />
+    <ClInclude Include="Models\Parametrs\WaveModelParametrs.h" />
     <ClInclude Include="Models\UIBuilders\IModelParametrsUiBilder.h" />
     <QtMoc Include="Models\UIBuilders\GausUiBilder.h" />
     <ClInclude Include="Models\IImageModel.h" />

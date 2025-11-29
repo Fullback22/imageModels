@@ -4,7 +4,11 @@ ImageGenerator::ImageGenerator(QWidget *parent)
     : QWidget(parent)
 {
     ui.setupUi(this);
-    
+    createModels();
+    for (size_t i{}; i < models.size(); ++i)
+    {
+        ui.cb_models->addItem(models[i].name.toLocal8Bit());
+    }
    /* test.setModel(&gParms);
     test.creatUi(*(ui.vertLayout_modelGrBox));
     test.toDefault();*/
@@ -176,15 +180,45 @@ void ImageGenerator::setModel(Models model)
         mainUiBilder->clearForm();
         mainUiBilder->hide();
     }
-    size_t index{ static_cast<size_t>(model) };
-    mainUiBilder = bilders[index];
-    mainBackgroundParamert = backgroundParametrs[index];
-    mainObjectParamert = objectParametrs[index];
-    mainModel = models[index];
+    modelData& activModel = models[static_cast<size_t>(model)];
+    
+    mainUiBilder = activModel.builder;
+    mainBackgroundParamert = activModel.backgroundParametr;
+    mainObjectParamert = activModel.objectParametr;
+    mainModel = activModel.model;
     mainUiBilder->setModel(mainBackgroundParamert);
     mainModel->setParametrs(mainBackgroundParamert);
     mainUiBilder->creatUi(*(ui.vertLayout_modelGrBox));
     mainUiBilder->toDefault();
+}
+
+void ImageGenerator::createModels()
+{
+    models.resize(static_cast<int>(Models::MaxValue));
+    
+    models[0].name = QString::fromLocal8Bit("Р“Р°СѓСЃРѕРІР° РјРѕРґРµР»СЊ");
+    models[0].model = new GausModel();
+    models[0].builder = new GausUiBilder();
+    models[0].backgroundParametr = new GausModelParametrs();
+    models[0].objectParametr = new GausModelParametrs();
+
+    models[1].name = QString::fromLocal8Bit("РњРѕРґРµР»СЊ РњР°СЂРєРѕРІР°");
+    models[1].model = new MarkovModel();
+    models[1].builder = new MarkovUiBilder();
+    models[1].backgroundParametr = new MarkovModelParametrs();
+    models[1].objectParametr = new MarkovModelParametrs();
+
+    models[2].name = QString::fromLocal8Bit("РњРѕРґРµР»СЊ Р“РёР±Р±СЃР°");
+    models[2].model = new GibsModel();
+    models[2].builder = new GibsUiBilder();
+    models[2].backgroundParametr = new GibsModelParametrs();
+    models[2].objectParametr = new GausModelParametrs();
+
+    models[3].name = QString::fromLocal8Bit("Р’РѕР»РЅРѕРІР°СЏ РјРѕРґРµР»СЊ");
+    models[3].model = new WaveModel();
+    models[3].builder = new WaveUiBuilder();
+    models[3].backgroundParametr = new WaveModelParametrs();
+    models[3].objectParametr = new WaveModelParametrs();
 }
 
 void ImageGenerator::slot_regenerateImage()
@@ -200,7 +234,7 @@ void ImageGenerator::slot_regenerateImage()
     else
     {
         QMessageBox::StandardButton warrning{};
-        warrning = QMessageBox::warning(this, "Warning", QString::fromLocal8Bit("Указаны некорректные параметры модели!"), QMessageBox::Ok);
+        warrning = QMessageBox::warning(this, "Warning", QString::fromLocal8Bit("РЈРєР°Р·Р°РЅС‹ РЅРµРєРѕСЂСЂРµРєС‚РЅС‹Рµ РїР°СЂР°РјРµС‚СЂС‹ РјРѕРґРµР»Рё!"), QMessageBox::Ok);
     }
 }
 
@@ -211,7 +245,7 @@ void ImageGenerator::slot_toDefualt()
 
 void ImageGenerator::slot_openFileDialog()
 {
-    savePath_ = QFileDialog::getExistingDirectory(this, QString::fromLocal8Bit("Выбор папки"));
+    savePath_ = QFileDialog::getExistingDirectory(this, QString::fromLocal8Bit("Р’С‹Р±РѕСЂ РїР°РїРєРё"));
     ui.le_saveWere->setText(savePath_);
 }
 
@@ -245,7 +279,7 @@ void ImageGenerator::slot_startGenerate()
     else
     {
         QMessageBox::StandardButton warrning{};
-        warrning = QMessageBox::warning(this, "Warning", QString::fromLocal8Bit("Указаны некорректные параметры модели!"), QMessageBox::Ok);
+        warrning = QMessageBox::warning(this, "Warning", QString::fromLocal8Bit("РЈРєР°Р·Р°РЅС‹ РЅРµРєРѕСЂСЂРµРєС‚РЅС‹Рµ РїР°СЂР°РјРµС‚СЂС‹ РјРѕРґРµР»Рё!"), QMessageBox::Ok);
     }
 }
 
@@ -256,7 +290,7 @@ void ImageGenerator::slot_changeModel(int i)
     else
     {
         QMessageBox::StandardButton warrning{};
-        warrning = QMessageBox::warning(this, "Warning", QString::fromLocal8Bit("Неверная модель"), QMessageBox::Ok);
+        warrning = QMessageBox::warning(this, "Warning", QString::fromLocal8Bit("РќРµРІРµСЂРЅР°СЏ РјРѕРґРµР»СЊ"), QMessageBox::Ok);
     }
 }
 

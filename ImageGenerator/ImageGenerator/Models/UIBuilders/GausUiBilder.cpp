@@ -8,7 +8,10 @@ GausUiBilder::~GausUiBilder()
 void GausUiBilder::creatUi(QVBoxLayout& targetLayout)
 {
 	BaseModelParametrsUiBilder::creatUi(targetLayout);
-	horLayout_medium = new QHBoxLayout();
+	parametrs.push_back(new UiModelParametr(targetLayout, QString::fromLocal8Bit("Среднее"), 255));
+	parametrs.push_back(new UiModelParametr(targetLayout, QString::fromLocal8Bit("СКО"), 90));
+
+	/*horLayout_medium = new QHBoxLayout();
 	targetLayout.addLayout(horLayout_medium);
 
 	label_medium = new QLabel(QString::fromLocal8Bit("Среднее"));
@@ -26,10 +29,13 @@ void GausUiBilder::creatUi(QVBoxLayout& targetLayout)
 	isInit_ = true;
 
 	spBox_medium->setMaximum(255);
-	spBox_sko->setMaximum(90);
+	spBox_sko->setMaximum(90);*/
 
-	connect(spBox_medium, qOverload<int>(& QSpinBox::valueChanged), this, &GausUiBilder::slot_updateMedium);
-	connect(spBox_sko, qOverload<int>(& QSpinBox::valueChanged), this, &GausUiBilder::slot_updateSko);
+	//connect(spBox_medium, qOverload<int>(& QSpinBox::valueChanged), this, &GausUiBilder::slot_updateMedium);
+	//connect(spBox_sko, qOverload<int>(& QSpinBox::valueChanged), this, &GausUiBilder::slot_updateSko);
+	isInit_ = true;
+	connect(parametrs[0], &UiModelParametr::updateValue, this, &GausUiBilder::slot_updateMedium);
+	connect(parametrs[1], &UiModelParametr::updateValue, this, &GausUiBilder::slot_updateSko);
 }
 
 void GausUiBilder::toDefault()
@@ -37,8 +43,8 @@ void GausUiBilder::toDefault()
 	if (isInit_)
 	{
 		BaseModelParametrsUiBilder::toDefault();
-		spBox_medium->setValue(100);
-		spBox_sko->setValue(5);
+		parametrs[0]->setValue(100);
+		parametrs[1]->setValue(5);
 	}
 }
 
@@ -47,7 +53,12 @@ void GausUiBilder::clearForm()
 	if (isInit_)
 	{
 		BaseModelParametrsUiBilder::clearForm();
-		label_medium->hide();
+		for (auto& param : parametrs)
+		{
+			delete param;
+		}
+		parametrs.clear();
+		/*label_medium->hide();
 		spBox_medium->hide();
 		horLayout_medium->removeWidget(label_medium);
 		horLayout_medium->removeWidget(spBox_medium);
@@ -67,7 +78,7 @@ void GausUiBilder::clearForm()
 		delete spBox_sko;
 		spBox_sko = nullptr;
 		delete horLayout_sko;
-		horLayout_sko = nullptr;
+		horLayout_sko = nullptr;*/
 		isInit_ = false;
 	}
 }

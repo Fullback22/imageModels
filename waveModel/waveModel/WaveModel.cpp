@@ -5,19 +5,19 @@ void WaveModel::generateWaveParams(float const propabilityThreshold, float const
 	std::normal_distribution<float> Rdis{ meanRadius, skoRadius };
 	std::normal_distribution<float> ksiDis{ meanBrightness, skoBrightness };
 	std::poisson_distribution<int> puasonDistr{ static_cast<double>(densityPuasonDist * deltaT) };
-		for (int i{ 0 }; i < mainImage.size().height; ++i)
+	for (int i{ 0 }; i < mainImage.size().height; ++i)
+	{
+		for (int j{ 0 }; j < mainImage.size().width; ++j)
 		{
-			for (int j{ 0 }; j < mainImage.size().width; ++j)
+			std::uniform_real_distribution<> dis{ 0.0, 1.0 };
+			if (dis(gen) < propabilityThreshold)
 			{
-				std::uniform_real_distribution<> dis{ 0.0, 1.0 };
-				if (dis(gen) < propabilityThreshold)
-				{
-					waveCenter.push_back(cv::Point(j, i));
-					R.push_back(Rdis(gen));
-					ksi.push_back(ksiDis(gen));
-				}
+				waveCenter.push_back(cv::Point(j, i));
+				R.push_back(Rdis(gen));
+				ksi.push_back(ksiDis(gen));
 			}
 		}
+	}
 }
 
 WaveModel::WaveModel(cv::Size const* imageSize, int const densityPuasonDist_):
@@ -31,11 +31,11 @@ cv::Mat WaveModel::generateStandartMainImage()
 {
 	int const c{1};
 	double const mu{ 0.1 };
-	int const iteration{ 10 };
+	int const iteration{ 3 };
 
 	for (int t{ 0 }; t < iteration; t += deltaT)
 	{
-		generateWaveParams(0.0001, 50, 15, 100, 30);
+		generateWaveParams(0.005, 10, 3, 100, 30);
 		cv::Mat lastImage{};
 		mainImage.copyTo(lastImage);
 		for (int i{ 0 }; i < mainImage.size().height; ++i)

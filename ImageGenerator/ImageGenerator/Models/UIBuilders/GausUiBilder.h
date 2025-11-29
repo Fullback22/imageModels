@@ -1,6 +1,7 @@
 #pragma once
 #include "BaseModelParametrsUiBilder.h"
 #include "../Parametrs/GausModelParametrs.h"
+#include "UiModelParametr.h"
 
 class GausUiBilder :
     public BaseModelParametrsUiBilder
@@ -8,9 +9,11 @@ class GausUiBilder :
     GausModelParametrs* modelParametrs_{};
 	bool isInit_{ false };
 	Q_OBJECT
-	QLabel* label_medium{}, *label_sko{};
-	QSpinBox* spBox_medium{}, *spBox_sko{};
-	QHBoxLayout* horLayout_medium{}, * horLayout_sko{};
+
+	QVector<UiModelParametr*> parametrs;
+	//QLabel* label_medium{}, *label_sko{};
+	//QSpinBox* spBox_medium{}, *spBox_sko{};
+	//QHBoxLayout* horLayout_medium{}, * horLayout_sko{};
 public:
 	~GausUiBilder();
 	void creatUi(QVBoxLayout& targetLayout) override;

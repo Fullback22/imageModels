@@ -2,7 +2,6 @@
 
 #include <QScrollArea>
 #include <qgridlayout.h>
-#include <qgridlayout.h>
 #include <qlineedit.h>
 #include <qlabel.h>
 #include <qvalidator.h>
