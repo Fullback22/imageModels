@@ -4,7 +4,7 @@
 #include <qspinbox.h>
 #include <qlabel.h>
 
-class UiModelParametr:public QWidget
+class UiIntModelParametr:public QWidget
 {
 	Q_OBJECT
 		
@@ -13,8 +13,8 @@ class UiModelParametr:public QWidget
 	QHBoxLayout* horLayout{};
 
 public:
-	UiModelParametr(QVBoxLayout& targetLayout, const QString& name, const int maxValue, const int minValue = 1, QWidget* parent = nullptr);
-	~UiModelParametr();
+	UiIntModelParametr(QVBoxLayout& targetLayout, const QString& name, const int maxValue, const int minValue = 1, QWidget* parent = nullptr);
+	~UiIntModelParametr();
 	int getValue() const;
 	void setValue(int const newValue);
 

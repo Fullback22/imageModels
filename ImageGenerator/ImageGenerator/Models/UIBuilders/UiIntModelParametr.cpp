@@ -1,6 +1,6 @@
-#include "UiModelPArametr.h"
+#include "UiIntModelPArametr.h"
 
-UiModelParametr::UiModelParametr(QVBoxLayout& targetLayout, const QString& name, const int maxValue, const int minValue, QWidget* parent):
+UiIntModelParametr::UiIntModelParametr(QVBoxLayout& targetLayout, const QString& name, const int maxValue, const int minValue, QWidget* parent):
 	QWidget(parent)
 {
 	horLayout = new QHBoxLayout();
@@ -14,10 +14,10 @@ UiModelParametr::UiModelParametr(QVBoxLayout& targetLayout, const QString& name,
 	spBoxForValue->setMaximum(maxValue);
 	spBoxForValue->setMinimum(minValue);
 
-	connect(spBoxForValue, qOverload<int>(&QSpinBox::valueChanged), this, &UiModelParametr::slot_changeValue);
+	connect(spBoxForValue, qOverload<int>(&QSpinBox::valueChanged), this, &UiIntModelParametr::slot_changeValue);
 }
 
-UiModelParametr::~UiModelParametr()
+UiIntModelParametr::~UiIntModelParametr()
 {
 	labelForName->hide();
 	spBoxForValue->hide();
@@ -31,7 +31,7 @@ UiModelParametr::~UiModelParametr()
 	horLayout = nullptr;
 }
 
-int UiModelParametr::getValue() const
+int UiIntModelParametr::getValue() const
 {
 	if (spBoxForValue != nullptr)
 		return spBoxForValue->value();
@@ -39,13 +39,13 @@ int UiModelParametr::getValue() const
 		return 0;
 }
 
-void UiModelParametr::setValue(int const newValue)
+void UiIntModelParametr::setValue(int const newValue)
 {
 	if (spBoxForValue != nullptr)
 		spBoxForValue->setValue(newValue);
 }
 
-void UiModelParametr::slot_changeValue(int value)
+void UiIntModelParametr::slot_changeValue(int value)
 {
 	emit updateValue(value);
 }

@@ -110,7 +110,8 @@
     <ClCompile Include="Models\UIBuilders\GibsUiBilder.cpp" />
     <ClCompile Include="Models\UIBuilders\MarkovUiBilder.cpp" />
     <ClCompile Include="Models\UIBuilders\ProbabilitiesFieldWidget.cpp" />
-    <ClCompile Include="Models\UIBuilders\UiModelParametr.cpp" />
+    <ClCompile Include="Models\UIBuilders\UiDoubleModelParametr.cpp" />
+    <ClCompile Include="Models\UIBuilders\UiIntModelParametr.cpp" />
     <ClCompile Include="Models\UIBuilders\WaveUiBuilder.cpp" />
     <ClCompile Include="Models\WaveModel.cpp" />
     <QtRcc Include="ImageGenerator.qrc" />
@@ -122,7 +123,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Models\GausModel.h" />
-    <QtMoc Include="Models\UIBuilders\UiModelParametr.h" />
+    <QtMoc Include="Models\UIBuilders\UiIntModelParametr.h" />
+    <QtMoc Include="Models\UIBuilders\UiDoubleModelParametr.h" />
     <ClInclude Include="Models\WaveModel.h" />
     <QtMoc Include="Models\UIBuilders\WaveUiBuilder.h" />
     <QtMoc Include="Models\UIBuilders\ProbabilitiesFieldWidget.h" />

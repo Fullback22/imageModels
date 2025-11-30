@@ -8,8 +8,8 @@ GausUiBilder::~GausUiBilder()
 void GausUiBilder::creatUi(QVBoxLayout& targetLayout)
 {
 	BaseModelParametrsUiBilder::creatUi(targetLayout);
-	parametrs.push_back(new UiModelParametr(targetLayout, QString::fromLocal8Bit("Среднее"), 255));
-	parametrs.push_back(new UiModelParametr(targetLayout, QString::fromLocal8Bit("СКО"), 90));
+	parametrs.push_back(new UiIntModelParametr(targetLayout, QString::fromLocal8Bit("Среднее"), 255));
+	parametrs.push_back(new UiIntModelParametr(targetLayout, QString::fromLocal8Bit("СКО"), 90));
 
 	/*horLayout_medium = new QHBoxLayout();
 	targetLayout.addLayout(horLayout_medium);
@@ -34,8 +34,8 @@ void GausUiBilder::creatUi(QVBoxLayout& targetLayout)
 	//connect(spBox_medium, qOverload<int>(& QSpinBox::valueChanged), this, &GausUiBilder::slot_updateMedium);
 	//connect(spBox_sko, qOverload<int>(& QSpinBox::valueChanged), this, &GausUiBilder::slot_updateSko);
 	isInit_ = true;
-	connect(parametrs[0], &UiModelParametr::updateValue, this, &GausUiBilder::slot_updateMedium);
-	connect(parametrs[1], &UiModelParametr::updateValue, this, &GausUiBilder::slot_updateSko);
+	connect(parametrs[0], &UiIntModelParametr::updateValue, this, &GausUiBilder::slot_updateMedium);
+	connect(parametrs[1], &UiIntModelParametr::updateValue, this, &GausUiBilder::slot_updateSko);
 }
 
 void GausUiBilder::toDefault()
