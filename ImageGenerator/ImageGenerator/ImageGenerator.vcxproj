@@ -105,11 +105,13 @@
     <ClCompile Include="Models\GausModel.cpp" />
     <ClCompile Include="Models\GibsModel.cpp" />
     <ClCompile Include="Models\MarkovModel.cpp" />
+    <ClCompile Include="Models\SimpelTwiceRandomModel.cpp" />
     <ClCompile Include="Models\UIBuilders\BaseModelParametrsUiBilder.cpp" />
     <ClCompile Include="Models\UIBuilders\GausUiBilder.cpp" />
     <ClCompile Include="Models\UIBuilders\GibsUiBilder.cpp" />
     <ClCompile Include="Models\UIBuilders\MarkovUiBilder.cpp" />
     <ClCompile Include="Models\UIBuilders\ProbabilitiesFieldWidget.cpp" />
+    <ClCompile Include="Models\UIBuilders\SimpeltwiceRandomUiBuilder.cpp" />
     <ClCompile Include="Models\UIBuilders\UiDoubleModelParametr.cpp" />
     <ClCompile Include="Models\UIBuilders\UiIntModelParametr.cpp" />
     <ClCompile Include="Models\UIBuilders\WaveUiBuilder.cpp" />
@@ -123,8 +125,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Models\GausModel.h" />
-    <QtMoc Include="Models\UIBuilders\UiIntModelParametr.h" />
+    <ClInclude Include="Models\Parametrs\SimpelTwiceRandomModelParametrs.h" />
+    <QtMoc Include="Models\UIBuilders\SimpeltwiceRandomUiBuilder.h" />
     <QtMoc Include="Models\UIBuilders\UiDoubleModelParametr.h" />
+    <QtMoc Include="Models\UIBuilders\UiIntModelParametr.h" />
+    <ClInclude Include="Models\SimpelTwiceRandomModel.h" />
     <ClInclude Include="Models\WaveModel.h" />
     <QtMoc Include="Models\UIBuilders\WaveUiBuilder.h" />
     <QtMoc Include="Models\UIBuilders\ProbabilitiesFieldWidget.h" />

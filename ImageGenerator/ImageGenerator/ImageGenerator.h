@@ -13,10 +13,12 @@
 #include "Models/MarkovModel.h"
 #include "Models/GibsModel.h"
 #include "Models/WaveModel.h"
+#include "Models/SimpelTwiceRandomModel.h"
 #include "Models/UIBuilders/GausUiBilder.h"
 #include "Models/UIBuilders/MarkovUiBilder.h"
 #include "Models/UIBuilders/GibsUiBilder.h"
 #include "Models/UIBuilders/WaveUiBuilder.h"
+#include "Models/UIBuilders/SimpeltwiceRandomUiBuilder.h"
 
 
 class ImageGenerator : public QWidget
@@ -27,7 +29,8 @@ class ImageGenerator : public QWidget
         Markov = 1,
         Gibs = 2,
         WaveModel = 3,
-        MaxValue = 4
+        SimpeltwiceRandomUiBuilder = 4,
+        MaxValue = 5
     };
     struct modelData
     {

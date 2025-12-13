@@ -212,13 +212,19 @@ void ImageGenerator::createModels()
     models[2].model = new GibsModel();
     models[2].builder = new GibsUiBilder();
     models[2].backgroundParametr = new GibsModelParametrs();
-    models[2].objectParametr = new GausModelParametrs();
+    models[2].objectParametr = new GibsModelParametrs();
 
     models[3].name = QString::fromLocal8Bit("Волновая модель");
     models[3].model = new WaveModel();
     models[3].builder = new WaveUiBuilder();
     models[3].backgroundParametr = new WaveModelParametrs();
     models[3].objectParametr = new WaveModelParametrs();
+
+    models[4].name = QString::fromLocal8Bit("Дважды случайная модель");
+    models[4].model = new SimpelTwiceRandomModel();
+    models[4].builder = new SimpeltwiceRandomUiBuilder();
+    models[4].backgroundParametr = new SimpelTwiceRandomModelParametrs();
+    models[4].objectParametr = new SimpelTwiceRandomModelParametrs();
 }
 
 void ImageGenerator::slot_regenerateImage()
@@ -228,6 +234,8 @@ void ImageGenerator::slot_regenerateImage()
         mainModel->computeParametrsForObject(mainObjectParamert, ui.spinBox_contrast->value());
         cv::Mat image{};
         mainModel->generateImage(image);
+        cv::Scalar meanValue = cv::mean(image);
+        ui.label_totalMean->setText(QString::number(meanValue[0]));
         addObjects(image);
         showImage(image);
     }

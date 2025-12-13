@@ -5,7 +5,8 @@ void WaveModel::generateWaveParams()
 	std::random_device rd{};
 	std::mt19937 gen{};
 	std::normal_distribution<float> Rdis{ param_->meanRadius, param_->skoRadius };
-	std::normal_distribution<float> ksiDis{ param_->meanBrightness, param_->skoBrightness };
+	std::normal_distribution<float> ksiDis{ param_->meanBrightness / 2, param_->skoBrightness };
+	//std::normal_distribution<float> ksiDis{ 0.5 / 2.0, 0.01 };
 	
 	int maxQuantityWave{ param_->imageHeigth * param_->imageWidth };
 	int waveThreshold{ (maxQuantityWave / (100  * static_cast<int>(iteration))) * static_cast<int>(param_->distThreshold) };
@@ -30,7 +31,8 @@ void WaveModel::generateWaveParams()
 
 void WaveModel::generateImage(cv::Mat& inOutImage)
 {
-	mainImage_ = cv::Mat::ones(param_->imageHeigth, param_->imageWidth, CV_8UC1) * param_->meanBrightness;
+	mainImage_ = cv::Mat::ones(param_->imageHeigth, param_->imageWidth, CV_8UC1) * (param_->meanBrightness / 2);
+	//mainImage_ = cv::Mat::ones(param_->imageHeigth, param_->imageWidth, CV_32FC1) * (0.5/2.0);
 	waveParams_.clear();
 	
 	float const mu{ 0.1 };
@@ -59,10 +61,13 @@ void WaveModel::generateImage(cv::Mat& inOutImage)
 				}
 				double firstSummand{ std::exp(-mu) };
 				mainImage_.at<uchar>(i, j) = lastImage.at<uchar>(i, j) * firstSummand + secondSummand / c;
+				//mainImage_.at<float>(i, j) = lastImage.at<float>(i, j) * firstSummand + secondSummand / c;
 			}
 		}
 	}
 	mainImage_.copyTo(inOutImage);
+	//cv::normalize(inOutImage, inOutImage, 1.0, 0.0, cv::NORM_MINMAX);
+	//cv::convertScaleAbs(inOutImage, inOutImage, 255.0);
 }
 
 void WaveModel::setParametrs(IModelParametrs* parametrs)

@@ -79,8 +79,17 @@
     <ClCompile Include="Models\WaveModel.cpp">
       <Filter>Models</Filter>
     </ClCompile>
-    <ClCompile Include="Models\UIBuilders\UiModelParametr.cpp">
+    <ClCompile Include="Models\UIBuilders\SimpeltwiceRandomUiBuilder.cpp">
       <Filter>Models\UiBuilders</Filter>
+    </ClCompile>
+    <ClCompile Include="Models\UIBuilders\UiDoubleModelParametr.cpp">
+      <Filter>Models\UiBuilders</Filter>
+    </ClCompile>
+    <ClCompile Include="Models\UIBuilders\UiIntModelParametr.cpp">
+      <Filter>Models\UiBuilders</Filter>
+    </ClCompile>
+    <ClCompile Include="Models\SimpelTwiceRandomModel.cpp">
+      <Filter>Models</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -117,6 +126,12 @@
     <ClInclude Include="Models\WaveModel.h">
       <Filter>Models</Filter>
     </ClInclude>
+    <ClInclude Include="Models\Parametrs\SimpelTwiceRandomModelParametrs.h">
+      <Filter>Models\Parametrs</Filter>
+    </ClInclude>
+    <ClInclude Include="Models\SimpelTwiceRandomModel.h">
+      <Filter>Models</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Models\UIBuilders\GausUiBilder.h">
@@ -137,7 +152,13 @@
     <QtMoc Include="Models\UIBuilders\WaveUiBuilder.h">
       <Filter>Models\UiBuilders</Filter>
     </QtMoc>
-    <QtMoc Include="Models\UIBuilders\UiModelParametr.h">
+    <QtMoc Include="Models\UIBuilders\SimpeltwiceRandomUiBuilder.h">
+      <Filter>Models\UiBuilders</Filter>
+    </QtMoc>
+    <QtMoc Include="Models\UIBuilders\UiDoubleModelParametr.h">
+      <Filter>Models\UiBuilders</Filter>
+    </QtMoc>
+    <QtMoc Include="Models\UIBuilders\UiIntModelParametr.h">
       <Filter>Models\UiBuilders</Filter>
     </QtMoc>
   </ItemGroup>

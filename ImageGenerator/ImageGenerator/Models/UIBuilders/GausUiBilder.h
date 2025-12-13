@@ -11,9 +11,6 @@ class GausUiBilder :
 	Q_OBJECT
 
 	QVector<UiIntModelParametr*> parametrs;
-	//QLabel* label_medium{}, *label_sko{};
-	//QSpinBox* spBox_medium{}, *spBox_sko{};
-	//QHBoxLayout* horLayout_medium{}, * horLayout_sko{};
 public:
 	~GausUiBilder();
 	void creatUi(QVBoxLayout& targetLayout) override;
