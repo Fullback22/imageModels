@@ -9,12 +9,6 @@ ImageGenerator::ImageGenerator(QWidget *parent)
     {
         ui.cb_models->addItem(models[i].name.toLocal8Bit());
     }
-   /* test.setModel(&gParms);
-    test.creatUi(*(ui.vertLayout_modelGrBox));
-    test.toDefault();*/
-    
-    //int s{ ui.vertLayout_modelGrBox->count() };
-    //setLayout(ui.vertLayout_modelGrBox);
     
     connect(ui.cb_models, qOverload<int>(&QComboBox::currentIndexChanged), this, &ImageGenerator::slot_changeModel);
     connect(ui.pb_regenerate, &QPushButton::clicked, this, &ImageGenerator::slot_regenerateImage);

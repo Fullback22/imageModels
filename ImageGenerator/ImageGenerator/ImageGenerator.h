@@ -46,11 +46,6 @@ class ImageGenerator : public QWidget
     QString savePath_{};
     bool generationInProgress_{ false };
     QVector<modelData> models;
-    //QVector<QString> modelNames{ QString::fromLocal8Bit("Гаусова модель"),  QString::fromLocal8Bit("Модель Маркова"),  QString::fromLocal8Bit("Модель Гиббса"),  QString::fromLocal8Bit("Волновая модель")};
-    //QVector<IImageModel*> models{ new GausModel(), new MarkovModel(), new GibsModel() };
-    //QVector<IModelParametrsUiBilder*> bilders{  new GausUiBilder(), new MarkovUiBilder(), new GibsUiBilder() };
-    //QVector<IModelParametrs*> backgroundParametrs{ new GausModelParametrs(), new MarkovModelParametrs(), new GibsModelParametrs() };
-    //QVector<IModelParametrs*> objectParametrs{ new GausModelParametrs(), new MarkovModelParametrs(), new GibsModelParametrs() };
     IModelParametrsUiBilder* mainUiBilder{};
     IImageModel* mainModel{};
     IModelParametrs* mainBackgroundParamert{};

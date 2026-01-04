@@ -83,8 +83,7 @@ void WaveModel::setParametrs(IModelParametrs* parametrs)
 void WaveModel::computeParametrsForObject(IModelParametrs* parametrs, float contrast)
 {
 	WaveModelParametrs* buferParametsr{ dynamic_cast<WaveModelParametrs*>(parametrs) };
-	buferParametsr->meanBrightness = param_->meanBrightness;
-	buferParametsr->meanBrightness *= contrast;
+	buferParametsr->meanBrightness = getMainObjectColor(contrast);
 	buferParametsr->skoBrightness = param_->skoBrightness;
 	buferParametsr->distThreshold = param_->distThreshold;
 	buferParametsr->meanRadius = param_->meanRadius;
@@ -93,5 +92,5 @@ void WaveModel::computeParametrsForObject(IModelParametrs* parametrs, float cont
 
 int WaveModel::getMainObjectColor(float contrast)
 {
-    return static_cast<int>(round(param_->meanBrightness * contrast));;
+	return static_cast<int>(round(param_->meanBrightness / (1.0f - contrast)));
 }

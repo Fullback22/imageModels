@@ -53,8 +53,7 @@ void MarkovModel::setParametrs(IModelParametrs* parametrs)
 void MarkovModel::computeParametrsForObject(IModelParametrs* parametrs, float contrast)
 {
 	MarkovModelParametrs* buferParametsr{ dynamic_cast<MarkovModelParametrs*>(parametrs) };
-	buferParametsr->medium = param_->medium;
-	buferParametsr->medium *= contrast;
+	buferParametsr->medium = getMainObjectColor(contrast);
 	buferParametsr->quantityColors = param_->quantityColors;
 	buferParametsr->step = param_->step;
 	buferParametsr->conditionalTransitions = param_->conditionalTransitions;
@@ -63,5 +62,5 @@ void MarkovModel::computeParametrsForObject(IModelParametrs* parametrs, float co
 
 int MarkovModel::getMainObjectColor(float contrast)
 {
-	return static_cast<int>(round(param_->medium * contrast));
+	return static_cast<int>(round(param_->medium / (1.0f - contrast)));
 }

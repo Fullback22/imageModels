@@ -39,8 +39,7 @@ void GibsModel::setParametrs(IModelParametrs* parametrs)
 void GibsModel::computeParametrsForObject(IModelParametrs* parametrs, float contrast)
 {
 	GibsModelParametrs* buferParametsr{ dynamic_cast<GibsModelParametrs*>(parametrs) };
-	buferParametsr->medium = param_->medium;
-	buferParametsr->medium *= contrast;
+	buferParametsr->medium = getMainObjectColor(contrast);
 	buferParametsr->quantityColors = param_->quantityColors;
 	buferParametsr->step = param_->step;
 	buferParametsr->propabilityMap = param_->propabilityMap;
@@ -49,7 +48,7 @@ void GibsModel::computeParametrsForObject(IModelParametrs* parametrs, float cont
 
 int GibsModel::getMainObjectColor(float contrast)
 {
-	return static_cast<int>(round(param_->medium * contrast));
+	return static_cast<int>(round(param_->medium / (1.0f - contrast)));
 }
 
 int GibsModel::getValueFromPropabilityMap(int const firstClass, int const secondClass) const

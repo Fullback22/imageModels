@@ -27,7 +27,7 @@ void SimpelTwiceRandomModel::computeParametrsForObject(IModelParametrs* parametr
 	SimpelTwiceRandomModelParametrs* buferParametsr{ dynamic_cast<SimpelTwiceRandomModelParametrs*>(parametrs) };
 	buferParametsr->correlationCoeficients = param_->correlationCoeficients;
 	buferParametsr->sifmaForCorrelationCoeficients = param_->sifmaForCorrelationCoeficients;
-	buferParametsr->meanBrightness = param_->meanBrightness * contrast;
+	buferParametsr->meanBrightness = getMainObjectColor(contrast)/255.0f;
 	buferParametsr->skoBrightness = param_->skoBrightness;
 	buferParametsr->meanStdDeviation = param_->meanStdDeviation;
 	buferParametsr->skoStdDeviation = param_->skoStdDeviation;
@@ -36,7 +36,7 @@ void SimpelTwiceRandomModel::computeParametrsForObject(IModelParametrs* parametr
 
 int SimpelTwiceRandomModel::getMainObjectColor(float contrast)
 {
-	return static_cast<int>(round(param_->meanBrightness * 255.0 * contrast));
+	return static_cast<int>(round((param_->meanBrightness * 255.0f) / (1.0f - contrast)));
 }
 
 double SimpelTwiceRandomModel::getSigmaForGaus(double const sigmaForRandomCoeficients)
