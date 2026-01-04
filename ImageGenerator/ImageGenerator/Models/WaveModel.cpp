@@ -5,8 +5,7 @@ void WaveModel::generateWaveParams()
 	std::random_device rd{};
 	std::mt19937 gen{};
 	std::normal_distribution<float> Rdis{ param_->meanRadius, param_->skoRadius };
-	std::normal_distribution<float> ksiDis{ param_->meanBrightness / 2, param_->skoBrightness };
-	//std::normal_distribution<float> ksiDis{ 0.5 / 2.0, 0.01 };
+	std::normal_distribution<float> ksiDis{ 0.5, param_->skoBrightness/255.0f };
 	
 	int maxQuantityWave{ param_->imageHeigth * param_->imageWidth };
 	int waveThreshold{ (maxQuantityWave / (100  * static_cast<int>(iteration))) * static_cast<int>(param_->distThreshold) };
@@ -31,15 +30,13 @@ void WaveModel::generateWaveParams()
 
 void WaveModel::generateImage(cv::Mat& inOutImage)
 {
-	mainImage_ = cv::Mat::ones(param_->imageHeigth, param_->imageWidth, CV_8UC1) * (param_->meanBrightness / 2);
-	//mainImage_ = cv::Mat::ones(param_->imageHeigth, param_->imageWidth, CV_32FC1) * (0.5/2.0);
+	mainImage_ = cv::Mat::zeros(param_->imageHeigth, param_->imageWidth, CV_32FC1) ;
 	waveParams_.clear();
 	
 	float const mu{ 0.1 };
 	
 	for (size_t t{}; t < iteration; ++t)
 	{
-		
 		generateWaveParams();
 		cv::Mat lastImage{};
 		mainImage_.copyTo(lastImage);
@@ -56,18 +53,26 @@ void WaveModel::generateImage(cv::Mat& inOutImage)
 					double toExp{ pow(toSqr,2) * -2 };
 					double secondSummandnewPart{ exp(toExp) * waveParams_[z].ksi };
 					secondSummand += secondSummandnewPart;
-					if (secondSummandnewPart > param_->meanBrightness)
+					if (secondSummandnewPart > param_->meanBrightness / 255.0)
 						c += 1;
 				}
 				double firstSummand{ std::exp(-mu) };
-				mainImage_.at<uchar>(i, j) = lastImage.at<uchar>(i, j) * firstSummand + secondSummand / c;
-				//mainImage_.at<float>(i, j) = lastImage.at<float>(i, j) * firstSummand + secondSummand / c;
+				double newValue{ lastImage.at<float>(i, j) * firstSummand + secondSummand / c };
+				if (newValue > 1.0)
+					mainImage_.at<float>(i, j) = newValue - std::floor(newValue);
+				else
+					mainImage_.at<float>(i, j) = newValue;
 			}
 		}
 	}
-	mainImage_.copyTo(inOutImage);
-	//cv::normalize(inOutImage, inOutImage, 1.0, 0.0, cv::NORM_MINMAX);
-	//cv::convertScaleAbs(inOutImage, inOutImage, 255.0);
+	inOutImage = cv::Mat::zeros(param_->imageHeigth, param_->imageWidth, CV_8UC1);
+	for (int i{ 0 }; i < mainImage_.size().height; ++i)
+	{
+		for (int j{ 0 }; j < mainImage_.size().width; ++j)
+		{
+			inOutImage.at<uchar>(i, j) = static_cast<uchar>(mainImage_.at<float>(i, j) * param_->meanBrightness * 2);
+		}
+	}
 }
 
 void WaveModel::setParametrs(IModelParametrs* parametrs)
